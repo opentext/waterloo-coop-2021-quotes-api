@@ -1,10 +1,12 @@
 package com.opentext.waterloo.quotesapi.Dao;
 
 import com.opentext.waterloo.quotesapi.model.Quote;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class FakeQuote implements QuotesDao{
 
     private static List<Quote> DB = new ArrayList<>();

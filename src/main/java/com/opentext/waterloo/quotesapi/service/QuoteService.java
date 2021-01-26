@@ -1,4 +1,4 @@
-package service;
+package com.opentext.waterloo.quotesapi.service;
 
 
 import com.opentext.waterloo.quotesapi.model.Quote;

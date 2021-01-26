@@ -1,4 +1,4 @@
-package service;
+package com.opentext.waterloo.quotesapi.service;
 
 
 import org.springframework.beans.factory.annotation.Qualifier;

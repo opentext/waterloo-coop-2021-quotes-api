@@ -1,7 +1,7 @@
 package com.opentext.waterloo.quotesapi.api;
 
-import com.opentext.waterloo.quotesapi.model.Quotes;
-import com.opentext.waterloo.quotesapi.service.QuotesService;
+import com.opentext.waterloo.quotesapi.model.Quote;
+import com.opentext.waterloo.quotesapi.service.QuoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,26 +11,26 @@ import java.util.UUID;
 @RequestMapping("api/v1/quotes")
 @RestController
 public class QuotesController {
-    private final QuotesService quotesService;
+    private final QuoteService quoteService;
 
     @Autowired
-    public QuotesController(QuotesService quotesService) {
-        this.quotesService = quotesService;
+    public QuotesController(QuoteService quoteService) {
+        this.quoteService = quoteService;
     }
 
     @PostMapping
-    public void addPerson(@RequestBody Person person) {
-        personService.addPerson(person);
+    public void addQuote(@RequestBody Quote quote) {
+        quoteService.addQuote(quote);
     }
 
     @GetMapping
-    public List<Person> getAllPeople() {
-        return personService.getAllPeople();
+    public List<Quote> getAllQuote() {
+        return quoteService.getAllQuotes();
     }
 
-    @GetMapping(path = "{id}")
-    public Person getPersonById(@PathVariable("id") UUID id) {
-        return personService.getPersonById(id)
+    @GetMapping(path = "current?date={date}")
+    public Quote getQuoteById(@PathVariable("date") UUID id) {
+        return quoteService.getQuoteById(id)
                 .orElse(null);
     }
 }

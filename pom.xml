@@ -11,8 +11,8 @@
     <groupId>com.opentext.waterloo</groupId>
     <artifactId>quotes-api</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>quotes-api</name>
-    <description>Backend for quote service</description>
+    <name>quotes-com.opentext.waterloo.quotesapi.api</name>
+    <description>Backend for quote com.opentext.waterloo.quotesapi.service</description>
     <properties>
         <java.version>11</java.version>
     </properties>

@@ -10,22 +10,17 @@ import java.util.UUID;
 
 @RequestMapping("api/v1/quotes")
 @RestController
-public class QuotesController {
+public class QuoteController {
     private final QuoteService quoteService;
 
     @Autowired
-    public QuotesController(QuoteService quoteService) {
+    public QuoteController(QuoteService quoteService) {
         this.quoteService = quoteService;
     }
 
     @PostMapping
     public void addQuote(@RequestBody Quote quote) {
         quoteService.addQuote(quote);
-    }
-
-    @GetMapping
-    public List<Quote> getAllQuote() {
-        return quoteService.getAllQuotes();
     }
 
     @GetMapping(path = "current?date={date}")

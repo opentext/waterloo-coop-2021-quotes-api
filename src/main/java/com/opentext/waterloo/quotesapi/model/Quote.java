@@ -1,5 +1,7 @@
 package com.opentext.waterloo.quotesapi.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.UUID;
 
 public class Quote {
@@ -8,7 +10,9 @@ public class Quote {
     private final String text;
     private final String date; // ISO date
 
-    public Quote(UUID id, String text, String date) {
+    public Quote(@JsonProperty("id") UUID id,
+                 @JsonProperty("text") String text,
+                 @JsonProperty("date") String date) {
         this.id = id;
         this.text = text;
         this.date = date;

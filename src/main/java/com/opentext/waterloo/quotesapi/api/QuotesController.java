@@ -29,8 +29,8 @@ public class QuotesController {
     }
 
     @GetMapping(path = "current?date={date}")
-    public Quote getQuoteById(@PathVariable("date") UUID id) {
-        return quoteService.getQuoteById(id)
+    public Quote getQuoteByDate(@PathVariable("date") String date) {
+        return quoteService.getQuoteByDate(date)
                 .orElse(null);
     }
 }

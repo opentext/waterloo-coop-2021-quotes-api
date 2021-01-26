@@ -25,5 +25,13 @@ public class FakeQuote implements QuoteDao {
                 .findFirst();
     }
 
+    @Override
+    public int insertQuote(Quote quote) {
+        return 0;
+    }
 
+    @Override
+    public Optional<Quote> selectQuoteByDate(String date) {
+        return Optional.empty();
+    }
 }

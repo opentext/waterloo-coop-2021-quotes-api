@@ -11,6 +11,11 @@ import java.util.UUID;
 public class QuoteDataAccessService implements QuoteDao{
 
     @Override
+    public int putQuote(String date, Quote quote) {
+        return 0;
+    }
+
+    @Override
     public int putQuote(Quote quote) {
         return 0;
     }

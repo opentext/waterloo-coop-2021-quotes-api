@@ -25,8 +25,7 @@ public class QuoteDataAccessService implements QuoteDao{
 
     @Override
     public int incrementLike(boolean like, Quote quote) {
-
-
+    // Call increment function from Quote class here
         return 1;
     }
 

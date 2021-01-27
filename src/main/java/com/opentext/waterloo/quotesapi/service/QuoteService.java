@@ -17,7 +17,7 @@ public class QuoteService {
     private final QuoteDao quoteDao;
 
     @Autowired
-    public QuoteService (@Qualifier ("fakeDao") QuoteDao quoteDao){ //change qualifier to postgres later
+    public QuoteService (@Qualifier ("postgres") QuoteDao quoteDao){ //change qualifier to postgres later
         this.quoteDao = quoteDao;
     }
 

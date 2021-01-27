@@ -1,0 +1,4 @@
+CREATE TABLE Quote(
+    id UUID NOT NULL PRIMARY KEY,
+    text
+)

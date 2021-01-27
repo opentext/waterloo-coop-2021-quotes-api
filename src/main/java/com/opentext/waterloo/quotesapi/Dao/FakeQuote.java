@@ -25,4 +25,9 @@ public class FakeQuote implements QuoteDao {
                 .findFirst();
     }
 
+    @Override
+    public int incrementLike(boolean like, Quote quote) {
+        return 0;
+    }
+
 }

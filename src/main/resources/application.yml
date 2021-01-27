@@ -1,0 +1,6 @@
+app:
+  datasource:
+    jdbc-url: jdbc:postgresql://localhost:5432/placeholder-database-name
+    username: postgres
+    password: placeholder-password
+    pool-size: 30

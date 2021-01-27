@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
+@Repository("postgres")
 public class FakeQuote implements QuoteDao {
 
     private static List<Quote> DB = new ArrayList<>();

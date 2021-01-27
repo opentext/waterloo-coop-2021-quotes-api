@@ -3,6 +3,7 @@ package com.opentext.waterloo.quotesapi.api;
 import com.opentext.waterloo.quotesapi.model.Quote;
 import com.opentext.waterloo.quotesapi.service.QuoteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class QuoteController {
     }
 
     @PostMapping
-    public void addQuote(@RequestBody Quote quote) {
+    public void addQuote(@NonNull @RequestBody Quote quote) {
         quoteService.addQuote(quote);
     }
 

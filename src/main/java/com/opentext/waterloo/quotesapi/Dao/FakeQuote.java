@@ -19,19 +19,9 @@ public class FakeQuote implements QuoteDao {
     }
 
     @Override
-    public Optional<Quote> getQuoteByDate(String Date) {
-        return DB.stream()
-                .filter(quote -> quote.getDate().equals(Date))
-                .findFirst();
-    }
-
-    @Override
-    public int insertQuote(Quote quote) {
-        return 0;
-    }
-
-    @Override
     public Optional<Quote> selectQuoteByDate(String date) {
-        return Optional.empty();
+        return DB.stream()
+                .filter(quote -> quote.getDate().equals(date))
+                .findFirst();
     }
 }

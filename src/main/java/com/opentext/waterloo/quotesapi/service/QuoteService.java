@@ -13,7 +13,7 @@ import java.util.UUID;
 public class QuoteService {
     private final QuoteDao quoteDao;
 
-    public QuoteService (@Qualifier ("postgres") QuoteDao quoteDao){
+    public QuoteService (@Qualifier ("fakeDao") QuoteDao quoteDao){
         this.quoteDao = quoteDao;
     }
 

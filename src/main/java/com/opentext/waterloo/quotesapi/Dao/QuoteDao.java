@@ -6,11 +6,11 @@ import java.util.Optional;
 
 public interface QuoteDao {
 
-    int putQuote(Quote current);
+    int putQuote(Quote quote);
 
-    Optional<Quote> getQuoteByDate(String Date);
+//    Optional<Quote> getQuoteByDate(String Date);
 
-    int insertQuote(Quote quote);
+//    int insertQuote(Quote quote);
 
-    Optional<Quote> selectQuoteByDate(String date);
+//    Optional<Quote> selectQuoteByDate(String date);
 }

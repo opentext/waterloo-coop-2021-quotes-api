@@ -8,9 +8,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
-@RequestMapping("api/v1/quotes")
+@RequestMapping(path = "api/v1/quotes")
 @RestController
 public class QuoteController {
+
     private final QuoteService quoteService;
 
     @Autowired
@@ -23,9 +24,14 @@ public class QuoteController {
         quoteService.addQuote(quote);
     }
 
-    @GetMapping(path = "current?date={date}")
-    public Quote getQuoteByDate(@PathVariable("date") String date) {
-        return quoteService.getQuoteByDate(date)
-                .orElse(null);
+    @GetMapping
+    public List<Quote> quotes() {
+        return quoteService.quotes();
     }
+
+//    @GetMapping(path = "current?date={date}")
+//    public Quote getQuoteByDate(@PathVariable("date") String date) {
+//        return quoteService.getQuoteByDate(date)
+//                .orElse(null);
+//    }
 }

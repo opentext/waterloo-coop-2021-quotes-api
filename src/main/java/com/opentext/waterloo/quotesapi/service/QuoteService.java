@@ -25,7 +25,7 @@ public class QuoteService {
         return quoteDao.putQuote(quote);
     }
 
-    public List<Quote> quotes(){
+    public List<Quote> quotes(){ //idk how necessary this is
         return List.of(
                 new Quote(
                         UUID.randomUUID(),
@@ -40,7 +40,7 @@ public class QuoteService {
         return quoteDao.selectQuoteByDate(date);
     }
 
-    public int incrementsLikes(boolean like, Quote quote){
+    public int incrementLikes(boolean like, Quote quote){
         return quoteDao.incrementLike(like, quote);
     }
 

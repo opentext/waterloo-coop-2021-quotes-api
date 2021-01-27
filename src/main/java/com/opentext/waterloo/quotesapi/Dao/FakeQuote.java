@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
+@Repository("fakeDao")
 public class FakeQuote implements QuoteDao {
 
     private static List<Quote> DB = new ArrayList<>();
@@ -19,19 +19,10 @@ public class FakeQuote implements QuoteDao {
     }
 
     @Override
-    public Optional<Quote> getQuoteByDate(String Date) {
+    public Optional<Quote> selectQuoteByDate(String date) {
         return DB.stream()
-                .filter(quote -> quote.getDate().equals(Date))
+                .filter(quote -> quote.getDate().equals(date))
                 .findFirst();
     }
 
-    @Override
-    public int insertQuote(Quote quote) {
-        return 0;
-    }
-
-    @Override
-    public Optional<Quote> selectQuoteByDate(String date) {
-        return Optional.empty();
-    }
 }

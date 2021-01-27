@@ -23,11 +23,6 @@ public class QuotesController {
         quoteService.addQuote(quote);
     }
 
-    @GetMapping
-    public List<Quote> getAllQuote() {
-        return quoteService.getAllQuotes();
-    }
-
     @GetMapping(path = "current?date={date}")
     public Quote getQuoteByDate(@PathVariable("date") String date) {
         return quoteService.getQuoteByDate(date)

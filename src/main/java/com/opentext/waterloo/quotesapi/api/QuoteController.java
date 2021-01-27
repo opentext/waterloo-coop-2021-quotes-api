@@ -10,11 +10,11 @@ import java.util.UUID;
 
 @RequestMapping("api/v1/quotes")
 @RestController
-public class QuotesController {
+public class QuoteController {
     private final QuoteService quoteService;
 
     @Autowired
-    public QuotesController(QuoteService quoteService) {
+    public QuoteController(QuoteService quoteService) {
         this.quoteService = quoteService;
     }
 

@@ -5,12 +5,12 @@ import com.opentext.waterloo.quotesapi.model.Quote;
 import java.util.Optional;
 
 public interface QuoteDao {
-    int putQuote(String date, Quote quote);
 
-    default int putQuote(Quote quote) {
-        String date = "Placeholder"; //Placeholder date
-        return putQuote(date, quote);
-    }
+    int putQuote(Quote quote);
 
-    Optional<Quote> selectQuoteByDate(String date);
+//    Optional<Quote> getQuoteByDate(String Date);
+
+//    int insertQuote(Quote quote);
+
+//    Optional<Quote> selectQuoteByDate(String date);
 }

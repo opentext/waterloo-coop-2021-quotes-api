@@ -2,9 +2,22 @@ package com.opentext.waterloo.quotesapi.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.persistence.*;
 import java.util.UUID;
 
+@Entity
+@Table
 public class Quote {
+    @Id
+    @SequenceGenerator(
+            name = "quote_sequence",
+            sequenceName = "quote_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "quote_sequence"
+    )
 
     private final UUID id;
     private final String text;

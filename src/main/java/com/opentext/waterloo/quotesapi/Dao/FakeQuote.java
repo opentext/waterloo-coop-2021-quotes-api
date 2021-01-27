@@ -13,16 +13,25 @@ public class FakeQuote implements QuoteDao {
     private static List<Quote> DB = new ArrayList<>();
 
     @Override
-    public int putQuote(String date, Quote quote) {
+    public int putQuote(Quote quote) {
         DB.add(new Quote(quote.getId(), quote.getText(), quote.getDate()));
         return 1;
     }
-
-    @Override
-    public Optional<Quote> selectQuoteByDate(String date) {
-        return DB.stream()
-                .filter(quote -> quote.getDate().equals(date))
-                .findFirst();
-    }
-
+//
+//    @Override
+//    public Optional<Quote> getQuoteByDate(String Date) {
+//        return DB.stream()
+//                .filter(quote -> quote.getDate().equals(Date))
+//                .findFirst();
+//    }
+//
+//    @Override
+//    public int insertQuote(Quote quote) {
+//        return 0;
+//    }
+//
+//    @Override
+//    public Optional<Quote> selectQuoteByDate(String date) {
+//        return Optional.empty();
+//    }
 }

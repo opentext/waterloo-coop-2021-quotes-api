@@ -27,7 +27,8 @@ public class FakeQuote implements QuoteDao {
 
     @Override
     public int incrementLike(boolean like, Quote quote) {
-        return 0;
+        quote.addReaction(like);
+        return 1;
     }
 
 }

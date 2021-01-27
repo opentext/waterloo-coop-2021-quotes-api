@@ -1,4 +1,4 @@
-package com.opentext.waterloo.quotesapi.Dao;
+/*package com.opentext.waterloo.quotesapi.Dao;
 
 import com.opentext.waterloo.quotesapi.model.Quote;
 import org.springframework.stereotype.Repository;
@@ -15,6 +15,7 @@ public class QuoteDataAccessService implements QuoteDao{
         return 0;
     }
 
+    /*
     @Override
     public int putQuote(Quote quote) {
         return 0;
@@ -29,4 +30,4 @@ public class QuoteDataAccessService implements QuoteDao{
     public List<Quote> selectAllQuote() {
         return List.of(new Quote(UUID.randomUUID(), "This is a placeholder", "Date placeholder"));
     }
-}
+}*/

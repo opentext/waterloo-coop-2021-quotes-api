@@ -24,7 +24,7 @@ public class QuoteController {
         quoteService.addQuote(quote);
     }
 
-    @GetMapping(path = "current?date={date}")
+    @GetMapping(path = "{date}")
     public Quote getQuoteByDate(@PathVariable("date") String date) {
         return quoteService.getQuoteByDate(date)
                 .orElse(null);

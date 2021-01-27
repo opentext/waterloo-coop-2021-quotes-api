@@ -6,7 +6,7 @@ import java.util.Optional;
 
 public interface QuoteDao {
 
-    int putQuote(Quote current);
+    int putQuote(Quote quote);
 
     Optional<Quote> selectQuoteByDate(String date);
 }

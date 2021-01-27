@@ -15,6 +15,7 @@ public class QuoteDataAccessService implements QuoteDao{
         return 0;
     }
 
+
     @Override
     public Optional<Quote> selectQuoteByDate(String date) {
         return Optional.empty();

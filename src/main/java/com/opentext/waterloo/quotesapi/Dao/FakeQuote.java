@@ -13,7 +13,7 @@ public class FakeQuote implements QuoteDao {
     private static List<Quote> DB = new ArrayList<>();
 
     @Override
-    public int putQuote(Quote quote){
+    public int putQuote(Quote quote) {
         DB.add(new Quote(quote.getId(), quote.getText(), quote.getDate()));
         return 1;
     }

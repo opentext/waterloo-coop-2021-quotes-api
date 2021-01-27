@@ -8,7 +8,9 @@ public interface QuoteDao {
 
     int putQuote(Quote quote);
 
+//    Optional<Quote> getQuoteByDate(String Date);
 
+//    int insertQuote(Quote quote);
 
-    Optional<Quote> selectQuoteByDate(String date);
+//    Optional<Quote> selectQuoteByDate(String date);
 }

@@ -24,4 +24,5 @@ public class FakeQuote implements QuoteDao {
                 .filter(quote -> quote.getDate().equals(date))
                 .findFirst();
     }
+
 }

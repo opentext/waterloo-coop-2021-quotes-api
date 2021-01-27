@@ -15,7 +15,7 @@ public class QuoteDataAccessService implements QuoteDao{
     @Override
     public int putQuote(Quote quote) {
        return 0;
-    }
+    } //this will put the new quote into postgress db
 
 
     @Override
@@ -23,7 +23,12 @@ public class QuoteDataAccessService implements QuoteDao{
         return Optional.empty();
     }
 
-    public List<Quote> selectAllQuote() {
-        return List.of(new Quote(UUID.randomUUID(), "This is a placeholder", "Date placeholder"));
+    @Override
+    public int incrementLike(boolean like, Quote quote) {
+
+
+        return 1;
     }
+
+
 }

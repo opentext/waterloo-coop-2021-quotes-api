@@ -10,7 +10,7 @@ public interface QuoteDao {
 
 //    Optional<Quote> getQuoteByDate(String Date);
 
-//    int insertQuote(Quote quote);
+    Optional<Quote> selectQuoteByDate(String date);
 
-//    Optional<Quote> selectQuoteByDate(String date);
+    int incrementLike(boolean like, Quote quote);
 }

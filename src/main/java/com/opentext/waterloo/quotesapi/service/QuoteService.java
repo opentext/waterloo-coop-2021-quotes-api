@@ -17,7 +17,7 @@ public class QuoteService {
     private final QuoteDao quoteDao;
 
     @Autowired
-    public QuoteService (@Qualifier ("fakeDao") QuoteDao quoteDao){
+    public QuoteService (@Qualifier ("fakeDao") QuoteDao quoteDao){ //change qualifier to postgres later
         this.quoteDao = quoteDao;
     }
 
@@ -35,11 +35,14 @@ public class QuoteService {
         );
     }
 
-//    public Optional<Quote> getQuoteByDate (String date){ //placeholder date, subject to change
-//        return quoteDao.selectQuoteByDate(date);
-//    }
 
+    public Optional<Quote> getQuoteByDate (String date){ //placeholder date, subject to change
+        return quoteDao.selectQuoteByDate(date);
+    }
 
+    public int incrementsLikes(boolean like, Quote quote){
+        return quoteDao.incrementLike(like, quote);
+    }
 
 
 }

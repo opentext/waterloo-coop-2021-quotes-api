@@ -19,12 +19,14 @@ public class QuoteDataAccessService implements QuoteDao{
 
     @Override
     public int putQuote(Quote quote) {
-       return 0;
-    } //this will put the new quote into postgress db
+        //TODO CODE TO PUT STUFF INTO THE POSTGRESDB
+        return 0;
+    }
 
 
     @Override
     public Optional<Quote> selectQuoteByDate(String date) {
+        //TODO ACCESS POSTGRESDB
         return Optional.empty();
     }
 

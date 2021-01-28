@@ -13,7 +13,7 @@ public class FakeQuote implements QuoteDao {
     private static List<Quote> DB = new ArrayList<>();
 
     @Override
-    public int putQuote(String date, Quote quote) {
+    public int putQuote(Quote quote) {
         DB.add(new Quote(quote.getId(), quote.getText(), quote.getDate()));
         return 1;
     }
@@ -23,6 +23,17 @@ public class FakeQuote implements QuoteDao {
         return DB.stream()
                 .filter(quote -> quote.getDate().equals(date))
                 .findFirst();
+    }
+
+    @Override
+    public int incrementLike(boolean like, Quote quote) {
+        quote.addReaction(like);
+        return 1;
+    }
+
+    @Override
+    public List<Quote> allQuotes() {
+        return null;
     }
 
 }

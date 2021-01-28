@@ -7,16 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 @Service
 public class QuoteService {
-
     private final QuoteDao quoteDao;
 
     @Autowired
-    public QuoteService (@Qualifier ("fakeDao") QuoteDao quoteDao){
+    public QuoteService (@Qualifier ("postgres") QuoteDao quoteDao){ //change qualifier to postgres later
         this.quoteDao = quoteDao;
     }
 
@@ -24,11 +24,18 @@ public class QuoteService {
         return quoteDao.putQuote(quote);
     }
 
+    public List<Quote> quotes(){ //idk how necessary this is
+        return quoteDao.allQuotes();
+    }
+
+
     public Optional<Quote> getQuoteByDate (String date){ //placeholder date, subject to change
         return quoteDao.selectQuoteByDate(date);
     }
 
-
+    public int incrementLikes(boolean like, Quote quote){
+        return quoteDao.incrementLike(like, quote);
+    }
 
 
 }

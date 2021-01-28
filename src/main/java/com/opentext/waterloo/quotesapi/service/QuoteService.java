@@ -26,13 +26,7 @@ public class QuoteService {
     }
 
     public List<Quote> quotes(){ //idk how necessary this is
-        return List.of(
-                new Quote(
-                        UUID.randomUUID(),
-                        "hello",
-                        "2020"
-                )
-        );
+        return quoteDao.allQuotes();
     }
 
 

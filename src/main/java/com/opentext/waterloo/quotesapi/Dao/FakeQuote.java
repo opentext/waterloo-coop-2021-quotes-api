@@ -31,4 +31,9 @@ public class FakeQuote implements QuoteDao {
         return 1;
     }
 
+    @Override
+    public List<Quote> allQuotes() {
+        return null;
+    }
+
 }

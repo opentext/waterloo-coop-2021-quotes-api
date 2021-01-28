@@ -17,21 +17,23 @@ public class FakeQuote implements QuoteDao {
         DB.add(new Quote(quote.getId(), quote.getText(), quote.getDate()));
         return 1;
     }
-//
-//    @Override
-//    public Optional<Quote> getQuoteByDate(String Date) {
-//        return DB.stream()
-//                .filter(quote -> quote.getDate().equals(Date))
-//                .findFirst();
-//    }
-//
-//    @Override
-//    public int insertQuote(Quote quote) {
-//        return 0;
-//    }
-//
-//    @Override
-//    public Optional<Quote> selectQuoteByDate(String date) {
-//        return Optional.empty();
-//    }
+
+    @Override
+    public Optional<Quote> selectQuoteByDate(String date) {
+        return DB.stream()
+                .filter(quote -> quote.getDate().equals(date))
+                .findFirst();
+    }
+
+    @Override
+    public int incrementLike(boolean like, Quote quote) {
+        quote.addReaction(like);
+        return 1;
+    }
+
+    @Override
+    public List<Quote> allQuotes() {
+        return null;
+    }
+
 }

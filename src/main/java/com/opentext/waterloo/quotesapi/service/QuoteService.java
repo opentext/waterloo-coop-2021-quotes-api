@@ -16,7 +16,7 @@ public class QuoteService {
     private final QuoteDao quoteDao;
 
     @Autowired
-    public QuoteService (@Qualifier ("fakeDao") QuoteDao quoteDao){
+    public QuoteService (@Qualifier ("postgres") QuoteDao quoteDao){ //change qualifier to postgres later
         this.quoteDao = quoteDao;
     }
 
@@ -24,21 +24,18 @@ public class QuoteService {
         return quoteDao.putQuote(quote);
     }
 
-    public List<Quote> quotes(){
-        return List.of(
-                new Quote(
-                        UUID.randomUUID(),
-                        "hello",
-                        "2020"
-                )
-        );
+    public List<Quote> quotes(){ //idk how necessary this is
+        return quoteDao.allQuotes();
     }
 
-//    public Optional<Quote> getQuoteByDate (String date){ //placeholder date, subject to change
-//        return quoteDao.selectQuoteByDate(date);
-//    }
 
+    public Optional<Quote> getQuoteByDate (String date){ //placeholder date, subject to change
+        return quoteDao.selectQuoteByDate(date);
+    }
 
+    public int incrementLikes(boolean like, Quote quote){
+        return quoteDao.incrementLike(like, quote);
+    }
 
 
 }

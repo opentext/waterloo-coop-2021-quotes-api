@@ -18,14 +18,9 @@ public class QuoteDataAccessService implements QuoteDao{
 
     @Override
     public int putQuote(Quote quote) {
-        final String sql = "INSERT INTO quote(id, text, date) VALUES (uuid_generate_v4(), " +
-                quote.getText() + "', '" + quote.getDate() + "'";
-        jdbcTemplate.query(sql, resultSet -> {
-                UUID id = UUID.fromString(resultSet.getString("id"));
-                String text = resultSet.getString("text");
-            String date = resultSet.getString("date");
-            return new Quote (id, text, date);
-        });
+        final String sql = "INSERT INTO quote(id, text, date, likes, dislikes) VALUES (uuid_generate_v4(), '" +
+                quote.getText() + "', '" + quote.getDate() + "', 0, 0)";
+        jdbcTemplate.execute(sql);
         return 1;
     }
 
@@ -43,12 +38,14 @@ public class QuoteDataAccessService implements QuoteDao{
 
     @Override
     public void incrementLike(boolean like, String date) {
+        String sql;
         if (like){
-            String sql = "UPDATE quote SET likes = likes +1 WHERE date='" + date + "'";
+            sql = "UPDATE quote SET likes = likes +1 WHERE date='" + date + "'";
         }
         else{
-            String sql = "UPDATE quote SET dislikes = dislikes +1 WHERE date= '" +date + "'";
+            sql = "UPDATE quote SET dislikes = dislikes +1 WHERE date= '" +date + "'";
         }
+        jdbcTemplate.execute(sql);
 
     }
 

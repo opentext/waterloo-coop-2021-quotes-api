@@ -7,8 +7,10 @@ import org.slf4j.LoggerFactory;
 import com.opentext.waterloo.quotesapi.model.Quote;
 import com.opentext.waterloo.quotesapi.service.QuoteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RequestMapping(path = "api/v1/quotes")
@@ -39,6 +41,18 @@ public class QuoteController {
     public void incrementLikes(@RequestBody Boolean like, @PathVariable("date") String date) {
         quoteService.incrementLikes(like, date);
     }
+
+    @GetMapping
+    public List<Quote> quotes(){
+        return quoteService.quotes();
+    }
+
+
+    @PostMapping
+    public void addQuote(@RequestBody Quote quote){
+        quoteService.addQuote(quote);
+    }
+
 
     @GetMapping(path = "{date}")
     public Quote getQuotes(@PathVariable("id") String date) throws Exception {

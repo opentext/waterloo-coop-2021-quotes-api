@@ -37,8 +37,7 @@ public class QuoteController {
 
     @PostMapping(path = "{date}")
     public void incrementLikes(@RequestBody Boolean like, @PathVariable("date") String date) {
-        Quote quote = quoteService.getQuoteByDate(date);
-        quoteService.incrementLikes(like, quote);
+        quoteService.incrementLikes(like, date);
     }
 
     @GetMapping(path = "{date}")
@@ -47,7 +46,7 @@ public class QuoteController {
         try {
             log.info("Fetching from theysaidso");
             json = remoteConnect();
-        } catch (Exception e) { //failed, try to fetch locally stored json
+        } catch (Exception e) {
             log.error("Live quote fetch failed! Returning local json file" + e.getMessage());
             json = localConnect();
         }

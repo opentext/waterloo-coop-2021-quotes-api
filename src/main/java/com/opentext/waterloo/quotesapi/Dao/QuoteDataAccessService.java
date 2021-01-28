@@ -20,14 +20,27 @@ public class QuoteDataAccessService implements QuoteDao{
     @Override
     public int putQuote(Quote quote) {
         //TODO CODE TO PUT STUFF INTO THE POSTGRESDB
+
         return 0;
     }
 
 
     @Override
     public Optional<Quote> selectQuoteByDate(String date) {
-        //TODO ACCESS POSTGRESDB
-        return Optional.empty();
+        final String sql = "SELECT id, text, date FROM date";
+        jdbcTemplate.query(sql, (resultSet, i) -> {
+            UUID id =UUID.fromString(resultSet.getString("id"));
+            String quote =resultSet.getString("text");
+            String currentDate = resultSet.getString("date");
+            if (date == currentDate) {
+                return new Quote(id, quote, currentDate);
+            }
+            else{
+                //FIXME THIS IS WRONG AND NEEDS TO BE REDONE
+                return new Quote(id, quote, date);
+            }
+        });
+        return null; //FIXME THIS SHOULDN'T BE NULL
     }
 
     @Override

@@ -43,13 +43,15 @@ public class QuoteController {
         quoteService.addQuote(quote);
     }
 
-    @PostMapping
-    public void incrementLikes(@RequestBody Boolean like) {
-        quoteService.incrementLikes(like);
-    }
+//    @PostMapping
+//       public void incrementLikes(@RequestBody Boolean like, Quote quote) {
+//        quoteService.incrementLikes(like, quote);
+//    }
+
+
 
     @GetMapping(path = "{date}")
-    public Quote quotes() throws Exception {
+    public Quote fetchQuotes() throws Exception {
         JSONObject json;
         //try to fetch online api quote
         try {
@@ -64,7 +66,7 @@ public class QuoteController {
         String quoteOfTheDay = quote.get("quote").toString();
         String timestamp = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss").format(LocalDateTime.now());
 
-        Quote result = new Quote();
+        Quote result = new Quote(UUID.randomUUID() ,quoteOfTheDay, timestamp );
         return result;
     }
 

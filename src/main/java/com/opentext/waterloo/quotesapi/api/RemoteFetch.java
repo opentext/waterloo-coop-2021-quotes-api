@@ -30,8 +30,8 @@ public class RemoteFetch implements FetchQuote {
             urlConnection.setRequestMethod("GET");
             urlConnection.setConnectTimeout(3000);
 
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader
-                    (urlConnection.getInputStream()));
+            BufferedReader bufferedReader = new BufferedReader
+                    (new InputStreamReader(urlConnection.getInputStream()));
             StringBuilder stringBuilder = new StringBuilder();
             String line;
 

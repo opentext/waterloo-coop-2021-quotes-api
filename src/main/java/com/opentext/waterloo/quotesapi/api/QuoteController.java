@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -38,23 +39,15 @@ public class QuoteController {
         return localFetch.connect();
     }
 
-    @PostMapping
-    public void addQuote(@RequestBody Quote quote) {
-        quoteService.addQuote(quote);
-    }
-
-    @PostMapping
-    public void incrementLikes(@RequestBody Boolean like, @RequestBody Quote quote) {
+    @PostMapping(path = "{date}")
+    public void incrementLikes(@RequestBody Boolean like, @PathVariable("date") String date) {
+        Quote quote = quoteService.getQuoteByDate(date);
         quoteService.incrementLikes(like, quote);
     }
 
-    @GetMapping(path = "{date}/{id}")
-    public Quote getQuotes(@PathVariable("id") String date,
-                           @PathVariable("id") UUID id) throws Exception {
     @GetMapping(path = "{date}")
-    public Quote fetchQuotes() throws Exception {
+    public Quote getQuotes(@PathVariable("id") String date) throws Exception {
         JSONObject json;
-        //try to fetch online api quote
         try {
             log.info("Fetching from theysaidso");
             json = remoteConnect();
@@ -62,12 +55,12 @@ public class QuoteController {
             log.error("Live quote fetch failed! Returning local json file" + e.getMessage());
             json = localConnect();
         }
-        JSONObject quote = new JSONObject(json.getJSONObject("contents").getJSONArray("quotes").getString(0));
+        JSONObject quote = new JSONObject(json.getJSONObject("contents")
+                .getJSONArray("quotes").getString(0));
 
         String quoteOfTheDay = quote.get("quote").toString();
-        String timestamp = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss").format(LocalDateTime.now());
 
-        Quote result = new Quote();
+        Quote result = new Quote(UUID.randomUUID(), quoteOfTheDay, date);
         return result;
     }
 

@@ -21,8 +21,8 @@ public class QuoteDataAccessService implements QuoteDao{
         final String sql = "INSERT INTO quote(id, text, date) VALUES (uuid_generate_v4(), " +
                 quote.getText() + "', '" + quote.getDate() + "'";
         jdbcTemplate.query(sql, resultSet -> {
-            UUID id = UUID.fromString(resultSet.getString("id"));
-            String text = resultSet.getString("text");
+                UUID id = UUID.fromString(resultSet.getString("id"));
+                String text = resultSet.getString("text");
             String date = resultSet.getString("date");
             return new Quote (id, text, date);
         });
@@ -32,7 +32,7 @@ public class QuoteDataAccessService implements QuoteDao{
 
     @Override
     public Quote selectQuoteByDate(String date) {
-        final String sql = "SELECT id, text, date FROM quote WHERE date=" + date;
+        final String sql = "SELECT id, text, date FROM quote WHERE date='" + date + "'";
         return jdbcTemplate.query(sql, resultSet -> {
             UUID id =UUID.fromString(resultSet.getString("id"));
             String text =resultSet.getString("text");
@@ -44,10 +44,10 @@ public class QuoteDataAccessService implements QuoteDao{
     @Override
     public void incrementLike(boolean like, String date) {
         if (like){
-            String sql = "UPDATE quote SET likes = likes +1 WHERE date=" + date;
+            String sql = "UPDATE quote SET likes = likes +1 WHERE date='" + date + "'";
         }
         else{
-            String sql = "UPDATE quote SET dislikes = dislikes +1 WHERE date=" +date;
+            String sql = "UPDATE quote SET dislikes = dislikes +1 WHERE date= '" +date + "'";
         }
 
     }

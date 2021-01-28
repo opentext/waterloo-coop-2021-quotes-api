@@ -3,7 +3,6 @@ package com.opentext.waterloo.quotesapi.Dao;
 import com.opentext.waterloo.quotesapi.model.Quote;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface QuoteDao {
 
@@ -11,9 +10,9 @@ public interface QuoteDao {
 
 //    Optional<Quote> getQuoteByDate(String Date);
 
-    Optional<Quote> selectQuoteByDate(String date);
+    Quote selectQuoteByDate(String date);
 
-    int incrementLike(boolean like, Quote quote);
+    void incrementLike(boolean like, String date);
 
     List<Quote> allQuotes();
 }

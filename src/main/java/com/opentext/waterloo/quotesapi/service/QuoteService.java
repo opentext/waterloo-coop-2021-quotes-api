@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class QuoteService {
@@ -29,12 +27,12 @@ public class QuoteService {
     }
 
 
-    public Optional<Quote> getQuoteByDate (String date){ //placeholder date, subject to change
+    public Quote getQuoteByDate (String date){ //placeholder date, subject to change
         return quoteDao.selectQuoteByDate(date);
     }
 
-    public int incrementLikes(boolean like, Quote quote){
-        return quoteDao.incrementLike(like, quote);
+    public int incrementLikes(boolean like, String date){
+        return quoteDao.incrementLike(like, date);
     }
 
 

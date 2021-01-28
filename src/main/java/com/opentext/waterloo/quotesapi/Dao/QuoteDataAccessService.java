@@ -5,7 +5,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Repository("postgres")
@@ -19,33 +18,40 @@ public class QuoteDataAccessService implements QuoteDao{
 
     @Override
     public int putQuote(Quote quote) {
-        //TODO CODE TO PUT STUFF INTO THE POSTGRESDB
-
-        return 0;
-    }
-
-
-    @Override
-    public Optional<Quote> selectQuoteByDate(String date) {
-        final String sql = "SELECT id, text, date FROM date";
-        jdbcTemplate.query(sql, (resultSet, i) -> {
-            UUID id =UUID.fromString(resultSet.getString("id"));
-            String quote =resultSet.getString("text");
-            String currentDate = resultSet.getString("date");
-            if (date == currentDate) {
-                return new Quote(id, quote, currentDate);
-            }
-            else{
-                //FIXME THIS IS WRONG AND NEEDS TO BE REDONE
-                return new Quote(id, quote, date);
-            }
+        final String sql = "INSERT INTO quote(id, text, date) VALUES (uuid_generate_v4(), " +
+                quote.getText() + "', '" + quote.getDate() + "'";
+        jdbcTemplate.query(sql, resultSet -> {
+            UUID id = UUID.fromString(resultSet.getString("id"));
+            String text = resultSet.getString("text");
+            String date = resultSet.getString("date");
+            return new Quote (id, text, date);
         });
-        return null; //FIXME THIS SHOULDN'T BE NULL
+        return 1;
+    }
+
+
+    @Override
+    public Quote selectQuoteByDate(String date) {
+        final String sql = "SELECT id, text, date FROM quote WHERE date =" + date;
+        return jdbcTemplate.query(sql, resultSet -> {
+            UUID id =UUID.fromString(resultSet.getString("id"));
+            String text =resultSet.getString("text");
+            String currentDate = resultSet.getString("date");
+            return new Quote(id, text, currentDate);
+        });
     }
 
     @Override
-    public int incrementLike(boolean like, Quote quote) {
-        quote.addReaction(like);
+    public int incrementLike(boolean like, String date) {
+        if (like){
+            String sql = "UPDATE quote SET likes = likes +1";
+        }
+        else{
+            String sql = "UPDATE quote SET dislikes = dislikes +1";
+        }
+        jdbcTemplate.query(sql, resultSet -> {
+
+        });
         return 1;
     }
 
@@ -54,9 +60,9 @@ public class QuoteDataAccessService implements QuoteDao{
         final String sql = "SELECT id, text, date FROM quote";
         return jdbcTemplate.query(sql, (resultSet, i) -> {
             UUID id =UUID.fromString(resultSet.getString("id"));
-            String quote =resultSet.getString("text");
+            String text =resultSet.getString("text");
             String date = resultSet.getString("date");
-            return new Quote(id, quote, date);
+            return new Quote(id, text, date);
 
         });
     }

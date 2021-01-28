@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import java.util.UUID;
 
 @Repository("fakeDao")
 public class FakeQuote implements QuoteDao {
@@ -19,17 +19,15 @@ public class FakeQuote implements QuoteDao {
     }
 
     @Override
-    public Optional<Quote> selectQuoteByDate(String date) {
-        return DB.stream()
-                .filter(quote -> quote.getDate().equals(date))
-                .findFirst();
+    public Quote selectQuoteByDate(String date) {
+        return new Quote(UUID.randomUUID(), "no", date);
     }
 
     @Override
-    public int incrementLike(boolean like, Quote quote) {
-        quote.addReaction(like);
-        return 1;
+    public int incrementLike(boolean like, String date) {
+        return 0;
     }
+
 
     @Override
     public List<Quote> allQuotes() {

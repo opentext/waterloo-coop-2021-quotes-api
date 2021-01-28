@@ -24,8 +24,8 @@ public class FakeQuote implements QuoteDao {
     }
 
     @Override
-    public int incrementLike(boolean like, String date) {
-        return 0;
+    public void incrementLike(boolean like, String date) {
+        return;
     }
 
 

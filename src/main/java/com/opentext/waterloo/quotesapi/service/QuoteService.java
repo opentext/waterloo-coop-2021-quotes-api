@@ -31,8 +31,8 @@ public class QuoteService {
         return quoteDao.selectQuoteByDate(date);
     }
 
-    public int incrementLikes(boolean like, String date){
-        return quoteDao.incrementLike(like, date);
+    public void incrementLikes(boolean like, String date){
+        quoteDao.incrementLike(like, date);
     }
 
 

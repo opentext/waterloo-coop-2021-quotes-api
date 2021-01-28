@@ -32,7 +32,7 @@ public class QuoteDataAccessService implements QuoteDao{
 
     @Override
     public Quote selectQuoteByDate(String date) {
-        final String sql = "SELECT id, text, date FROM quote WHERE date =" + date;
+        final String sql = "SELECT id, text, date FROM quote WHERE date=" + date;
         return jdbcTemplate.query(sql, resultSet -> {
             UUID id =UUID.fromString(resultSet.getString("id"));
             String text =resultSet.getString("text");
@@ -42,17 +42,14 @@ public class QuoteDataAccessService implements QuoteDao{
     }
 
     @Override
-    public int incrementLike(boolean like, String date) {
+    public void incrementLike(boolean like, String date) {
         if (like){
-            String sql = "UPDATE quote SET likes = likes +1";
+            String sql = "UPDATE quote SET likes = likes +1 WHERE date=" + date;
         }
         else{
-            String sql = "UPDATE quote SET dislikes = dislikes +1";
+            String sql = "UPDATE quote SET dislikes = dislikes +1 WHERE date=" +date;
         }
-        jdbcTemplate.query(sql, resultSet -> {
 
-        });
-        return 1;
     }
 
     @Override

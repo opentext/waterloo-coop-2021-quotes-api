@@ -1,8 +1,10 @@
 package com.opentext.waterloo.quotesapi.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sun.xml.bind.v2.TODO;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.UUID;
 
 @Entity
@@ -22,6 +24,10 @@ public class Quote {
     private final UUID id;
     private final String text;
     private final String date; // ISO date
+    private int likes;
+    private int dislikes;
+
+    private ArrayList<Reaction> reactions = new ArrayList<>();
 
     public Quote(@JsonProperty("id") UUID id,
                  @JsonProperty("text") String text,
@@ -29,6 +35,27 @@ public class Quote {
         this.id = id;
         this.text = text;
         this.date = date;
+        this.likes = 0;
+        this.dislikes = 0;
+    }
+
+    public boolean addReaction(boolean isLike) {
+        if (uniqueAddress()) {
+            reactions.add(new Reaction(isLike));
+            if (isLike) {
+                likes ++;
+            }
+            else {
+                dislikes ++;
+            }
+            return true;
+        }
+        return false;
+    }
+
+    private boolean uniqueAddress() {
+        // TODO: Add code to get ip address, then check if unique
+        return true;
     }
 
     public UUID getId() {
@@ -41,5 +68,13 @@ public class Quote {
 
     public String getDate() {
         return date;
+    }
+
+    public int getLikes() {
+        return likes;
+    }
+
+    public int getDislikes() {
+        return dislikes;
     }
 }

@@ -1,4 +1,4 @@
-package datasource;
+package com.opentext.waterloo.quotesapi.datasource;
 
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.boot.context.properties.ConfigurationProperties;

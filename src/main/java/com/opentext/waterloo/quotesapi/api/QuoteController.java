@@ -50,6 +50,11 @@ public class QuoteController {
 
 
 
+    @GetMapping
+    public List<Quote> quotes(){
+        return quoteService.quotes();
+    }
+
     @GetMapping(path = "{date}")
     public Quote fetchQuotes() throws Exception {
         JSONObject json;
@@ -66,7 +71,7 @@ public class QuoteController {
         String quoteOfTheDay = quote.get("quote").toString();
         String timestamp = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss").format(LocalDateTime.now());
 
-        Quote result = new Quote(UUID.randomUUID() ,quoteOfTheDay, timestamp );
+        Quote result = new Quote(UUID.randomUUID() ,quoteOfTheDay, timestamp);
         return result;
     }
 

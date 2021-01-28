@@ -43,10 +43,10 @@ public class QuoteController {
         quoteService.addQuote(quote);
     }
 
-//    @PostMapping
-//       public void incrementLikes(@RequestBody Boolean like, Quote quote) {
-//        quoteService.incrementLikes(like, quote);
-//    }
+    @PostMapping
+       public void incrementLikes(@RequestBody Boolean like, @RequestBody Quote quote) {
+        quoteService.incrementLikes(like, quote);
+    }
 
 
 

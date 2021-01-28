@@ -44,12 +44,13 @@ public class QuoteController {
     }
 
     @PostMapping
-    public void incrementLikes(@RequestBody Boolean like) {
-        quoteService.incrementLikes(like);
+    public void incrementLikes(@RequestBody Boolean like, @RequestBody Quote quote) {
+        quoteService.incrementLikes(like, quote);
     }
 
-    @GetMapping(path = "{date}")
-    public Quote quotes() throws Exception {
+    @GetMapping(path = "{date}/{id}")
+    public Quote getQuotes(@PathVariable("id") String date,
+                           @PathVariable("id") UUID id) throws Exception {
         JSONObject json;
         //try to fetch online api quote
         try {

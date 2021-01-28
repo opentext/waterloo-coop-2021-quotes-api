@@ -46,7 +46,6 @@ public class QuoteDataAccessService implements QuoteDao{
             sql = "UPDATE quote SET dislikes = dislikes +1 WHERE date= '" +date + "'";
         }
         jdbcTemplate.execute(sql);
-
     }
 
     @Override

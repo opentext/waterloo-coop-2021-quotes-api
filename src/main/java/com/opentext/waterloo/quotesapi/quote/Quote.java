@@ -20,26 +20,12 @@ public class Quote {
 
     public Quote(@JsonProperty("id") UUID id,
                  @JsonProperty("text") String text,
-                 @JsonProperty("date") String date) {
+                 @JsonProperty("date") Date date) {
         this.id = id;
         this.text = text;
         this.date = date;
         this.likes = 0;
         this.dislikes = 0;
-    }
-
-    public boolean addReaction(boolean isLike) {
-        if (uniqueAddress()) {
-            reactions.add(new Reaction(isLike));
-            if (isLike) {
-                likes ++;
-            }
-            else {
-                dislikes ++;
-            }
-            return true;
-        }
-        return false;
     }
 
     private boolean uniqueAddress() {
@@ -55,7 +41,7 @@ public class Quote {
         return text;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 

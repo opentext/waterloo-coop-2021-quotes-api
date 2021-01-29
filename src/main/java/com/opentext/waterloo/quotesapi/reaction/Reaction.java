@@ -15,7 +15,7 @@ public class Reaction {
 
     @Id
     private UUID id;
-    private boolean like;
+    private boolean isLike;
     private Date date;
     private String address;
 
@@ -27,13 +27,13 @@ public class Reaction {
     public Reaction(Quote quote, boolean like, String address) {
         this.quote = quote;
         this.id = UUID.randomUUID();
-        this.like = like;
+        this.isLike = like;
         this.date = new Date();
         this.address = address;
     }
 
     public boolean getLike() {
-        return like;
+        return isLike;
     }
 
     public Date getDate() {

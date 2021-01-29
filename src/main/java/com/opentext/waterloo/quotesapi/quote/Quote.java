@@ -12,9 +12,9 @@ import java.util.UUID;
 public class Quote {
 
     @Id
-    private UUID id;
-    private String text;
-    private Date date; // ISO date
+    private final UUID id;
+    private final String text;
+    private final Date date; // ISO date
     private int likes;
     private int dislikes;
 
@@ -29,10 +29,6 @@ public class Quote {
         this.dislikes = 0;
     }
 
-    private boolean uniqueAddress() {
-        // TODO: Add code to get ip address, then check if unique
-        return true;
-    }
 
     public UUID getId() {
         return id;

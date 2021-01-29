@@ -5,6 +5,7 @@ import com.opentext.waterloo.quotesapi.reaction.Reaction;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.util.Date;
 import java.util.UUID;
 
 @Entity
@@ -13,7 +14,7 @@ public class Quote {
     @Id
     private final UUID id;
     private final String text;
-    private final String date; // ISO date
+    private final Date date; // ISO date
     private int likes;
     private int dislikes;
 

@@ -12,7 +12,7 @@ public interface QuoteDao {
 
     Quote selectQuoteByDate(String date);
 
-    void incrementLike(boolean like, String date);
+    void incrementLike(String like, String date);
 
     List<Quote> allQuotes();
 }

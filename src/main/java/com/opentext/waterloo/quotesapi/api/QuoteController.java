@@ -38,7 +38,7 @@ public class QuoteController {
     }
 
     @PostMapping(path = "{date}")
-    public void incrementLikes(@RequestBody Boolean like, @PathVariable("date") String date) {
+    public void incrementLikes(@RequestBody String like, @PathVariable("date") String date) {
         quoteService.incrementLikes(like, date);
     }
 

@@ -1,6 +1,7 @@
 package com.opentext.waterloo.quotesapi.Dao;
 
 import com.opentext.waterloo.quotesapi.model.Quote;
+import com.opentext.waterloo.quotesapi.model.Reaction;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -39,7 +40,7 @@ public class QuoteDataAccessService implements QuoteDao{
     }
 
     @Override
-    public void incrementLike(String like, String date) {
+    public void incrementLike(String like, String date, String address) {
         String sql;
         String bFlag1 = "true";
         if (bFlag1.equalsIgnoreCase(like)){
@@ -48,6 +49,7 @@ public class QuoteDataAccessService implements QuoteDao{
         else{
             sql = "UPDATE quote SET dislikes = dislikes +1 WHERE date= '" +date + "'";
         }
+        //TODO CALL FOR ID AND PUT ADDREACTION AND DON'T RUN IF ADDRESS IS THE SAME???
         jdbcTemplate.execute(sql);
     }
 
@@ -68,11 +70,8 @@ public class QuoteDataAccessService implements QuoteDao{
 
     @Override
     public void addReaction(boolean likes, UUID id) {
-        String sql;
-        if(likes){
-
-        }
-
+        final String sql = "INSERT INTO reaction(likes, date, address, Id) VALUES (" + likes + ", ";
+        //TODO FIGURE OUT HOW TO ACTUALLY ADD TO REACTION DATABASE AND ADD ADDRESS
     }
 
 

@@ -37,9 +37,9 @@ public class QuoteController {
         return localFetch.connect();
     }
 
-    @PostMapping(path = "{date}")
-    public void incrementLikes(@RequestBody String like, @PathVariable("date") String date) {
-        quoteService.incrementLikes(like, date);
+    @PostMapping(path = "{date}/{likes}/{address}")
+    public void incrementLikes(@PathVariable ("likes") String like, @PathVariable("date") String date, @PathVariable ("address") String address) {
+        quoteService.incrementLikes(like, date, address);
     }
 
     @GetMapping

@@ -5,37 +5,31 @@ import com.opentext.waterloo.quotesapi.quote.Quote;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.util.Date;
 import java.util.UUID;
 
 @Entity
+@Table
 public class Reaction {
 
     @Id
-    private final UUID id;
-    private final boolean like;
-    private final Date date;
-    private final String address;
+    private UUID id;
+    private boolean like;
+    private Date date;
+    private String address;
 
     @ManyToOne
-    private final Quote quote;
+    private Quote quote;
 
-    public Reaction(boolean like, Date date, String address) {
-        this.like = like;
-        this.date = date;
-        this.address = address;
-    }
+    public Reaction() {}
 
-    public Reaction(boolean like, String address) {
+    public Reaction(Quote quote, boolean like, String address) {
+        this.quote = quote;
+        this.id = UUID.randomUUID();
         this.like = like;
         this.date = new Date();
         this.address = address;
-    }
-
-    public Reaction(boolean like) {
-        this.like = like;
-        this.date = new Date();
-        this.address = "";
     }
 
     public boolean getLike() {

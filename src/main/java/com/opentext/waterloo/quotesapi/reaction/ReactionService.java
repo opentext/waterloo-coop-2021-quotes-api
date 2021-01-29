@@ -1,6 +1,6 @@
 package com.opentext.waterloo.quotesapi.reaction;
 
-import com.opentext.waterloo.quotesapi.quote.model.Quote;
+import com.opentext.waterloo.quotesapi.quote.Quote;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

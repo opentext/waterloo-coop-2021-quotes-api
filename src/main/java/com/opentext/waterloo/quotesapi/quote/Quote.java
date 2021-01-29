@@ -12,34 +12,21 @@ import java.util.UUID;
 public class Quote {
 
     @Id
-    private final UUID id;
-    private final String text;
-    private final Date date; // ISO date
+    private UUID id;
+    private String text;
+    private Date date; // ISO date
     private int likes;
     private int dislikes;
 
-    public Quote(@JsonProperty("id") UUID id,
-                 @JsonProperty("text") String text,
-                 @JsonProperty("date") String date) {
-        this.id = id;
+    public Quote() {}
+
+    public Quote(@JsonProperty("text") String text,
+                 @JsonProperty("date") Date date) {
+        this.id = UUID.randomUUID();
         this.text = text;
         this.date = date;
         this.likes = 0;
         this.dislikes = 0;
-    }
-
-    public boolean addReaction(boolean isLike) {
-        if (uniqueAddress()) {
-            reactions.add(new Reaction(isLike));
-            if (isLike) {
-                likes ++;
-            }
-            else {
-                dislikes ++;
-            }
-            return true;
-        }
-        return false;
     }
 
     private boolean uniqueAddress() {
@@ -55,7 +42,7 @@ public class Quote {
         return text;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 

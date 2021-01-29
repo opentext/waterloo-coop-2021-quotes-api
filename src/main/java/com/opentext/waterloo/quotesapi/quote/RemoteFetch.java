@@ -1,4 +1,4 @@
-package com.opentext.waterloo.quotesapi.api;
+package com.opentext.waterloo.quotesapi.quote;
 
 import com.opentext.waterloo.quotesapi.QuotesApiApplication;
 import org.json.JSONObject;

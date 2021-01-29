@@ -1,4 +1,4 @@
-package com.opentext.waterloo.quotesapi.api;
+package com.opentext.waterloo.quotesapi.quote;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Qualifier;

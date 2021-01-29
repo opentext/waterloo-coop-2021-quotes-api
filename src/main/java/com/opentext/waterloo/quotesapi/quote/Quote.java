@@ -1,10 +1,10 @@
 package com.opentext.waterloo.quotesapi.quote;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.opentext.waterloo.quotesapi.reaction.Reaction;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 import java.util.UUID;
 
@@ -28,10 +28,6 @@ public class Quote {
         this.dislikes = 0;
     }
 
-    private boolean uniqueAddress() {
-        // TODO: Add code to get ip address, then check if unique
-        return true;
-    }
 
     public UUID getId() {
         return id;

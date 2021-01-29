@@ -18,8 +18,8 @@ public class QuoteDataAccessService implements QuoteDao{
 
     @Override
     public int putQuote(Quote quote) {
-        final String sql = "INSERT INTO quote(id, text, date, likes, dislikes) VALUES (uuid_generate_v4(), '" +
-                quote.getText() + "', '" + quote.getDate() + "', 0, 0)";
+        final String sql = "INSERT INTO quote(id, text, date, likes, dislikes, reactionaddress) VALUES (uuid_generate_v4(), '" +
+                quote.getText() + "', '" + quote.getDate() + "', 0, 0, 'null')";
         jdbcTemplate.execute(sql);
         return 1;
     }
@@ -27,14 +27,14 @@ public class QuoteDataAccessService implements QuoteDao{
 
     @Override
     public Quote selectQuoteByDate(String date) {
-        final String sql = "SELECT id, text, date, likes, dislikes FROM quote WHERE date='" + date + "'";
+        final String sql = "SELECT id, text, date, likes, dislikes, reactionaddress FROM quote WHERE date='" + date + "'";
         return jdbcTemplate.query(sql, resultSet -> {
             UUID id =UUID.fromString(resultSet.getString("id"));
             String text =resultSet.getString("text");
             String currentDate = resultSet.getString("date");
-            String likes = resultSet.getString("likes");
-            String dislikes = resultSet.getString("dislikes");
-            return new Quote(id, text, currentDate, likes, dislikes);
+            int likes = resultSet.getInt("likes");
+            int dislikes = resultSet.getInt("dislikes");
+            return new Quote(id, text, currentDate, likes, dislikes, null);
         });
     }
 
@@ -42,7 +42,7 @@ public class QuoteDataAccessService implements QuoteDao{
     public void incrementLike(String like, String date) {
         String sql;
         String bFlag1 = "true";
-        if (like.equalsIgnoreCase(bFlag1)){
+        if (bFlag1.equalsIgnoreCase(like)){
             sql = "UPDATE quote SET likes = likes +1 WHERE date='" + date + "'";
         }
         else{
@@ -53,16 +53,26 @@ public class QuoteDataAccessService implements QuoteDao{
 
     @Override
     public List<Quote> allQuotes() {
-        final String sql = "SELECT id, text, date FROM quote";
+        final String sql = "SELECT id, text, date, likes, dislikes FROM quote";
         return jdbcTemplate.query(sql, (resultSet, i) -> {
             UUID id =UUID.fromString(resultSet.getString("id"));
             String text =resultSet.getString("text");
             String date = resultSet.getString("date");
-            String likes = resultSet.getString("likes");
-            String dislikes = resultSet.getString("dislikes");
-            return new Quote(id, text, date, likes, dislikes);
+            int likes = resultSet.getInt("likes");
+            int dislikes = resultSet.getInt("dislikes");
+
+            return new Quote(id, text, date, likes, dislikes, null );
 
         });
+    }
+
+    @Override
+    public void addReaction(boolean likes, UUID id) {
+        String sql;
+        if(likes){
+
+        }
+
     }
 
 

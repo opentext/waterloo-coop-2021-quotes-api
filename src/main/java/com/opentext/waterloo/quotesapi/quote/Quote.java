@@ -5,10 +5,12 @@ import com.opentext.waterloo.quotesapi.reaction.Reaction;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 import java.util.UUID;
 
 @Entity
+@Table
 public class Quote {
 
     @Id
@@ -21,8 +23,9 @@ public class Quote {
     public Quote() {}
 
     public Quote(@JsonProperty("text") String text,
-                 @JsonProperty("date") Date date) {
-        this.id = UUID.randomUUID();
+                 @JsonProperty("date") Date date,
+                 @JsonProperty UUID id) {
+        this.id = id;
         this.text = text;
         this.date = date;
         this.likes = 0;

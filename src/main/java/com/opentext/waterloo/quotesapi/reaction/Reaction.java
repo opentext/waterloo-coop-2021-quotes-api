@@ -12,7 +12,6 @@ import java.util.UUID;
 @Entity
 @Table
 public class Reaction {
-
     @Id
     private UUID id;
     private boolean isLike;

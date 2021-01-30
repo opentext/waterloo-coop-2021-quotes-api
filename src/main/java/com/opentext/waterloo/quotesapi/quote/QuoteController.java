@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -15,17 +16,20 @@ import java.util.UUID;
 public class QuoteController {
     @Autowired
     private QuoteRepository quoteRepository;
-    private final QuoteService quoteService;
 
 
-    public QuoteController(QuoteRepository quoteRepository, QuoteService quoteService) {
+    public QuoteController(QuoteRepository quoteRepository) {
         this.quoteRepository = quoteRepository;
-        this.quoteService = quoteService;
     }
 
     @GetMapping
     public List<Quote> getQuote(){
-        return quoteService.findAll();
+        return quoteRepository.findAll();
+    }
+
+    @PostMapping
+    public void putQuote(Quote quote){
+        quoteRepository.save(quote);
     }
 
 

@@ -8,30 +8,67 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.opentext.waterloo.quotesapi.quote.QuoteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping(path = "api/v1/quotes")
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+@RequestMapping(path = "/api/v1/quotes")
 @RestController
 public class QuoteController {
-    private static final Logger log = LoggerFactory.getLogger(QuotesApiApplication.class);
+//    private static final Logger log = LoggerFactory.getLogger(QuotesApiApplication.class);
+
+    private final String DATE_FORMAT = "dd-MM-yyyy";
+
+    @Autowired
     private QuoteService quoteService;
     @Autowired
-    private final FetchQuote localFetch;
+    private FetchQuote localFetch;
     @Autowired
-    private final FetchQuote remoteFetch;
+    private FetchQuote remoteFetch;
 
-    @Autowired
-    public QuoteController(QuoteService quoteService, FetchQuote localFetch, FetchQuote remoteFetch) {
-        this.quoteService = quoteService;
-        this.localFetch = localFetch;
-        this.remoteFetch = remoteFetch;
-    }
-
+////    @Autowired
+////    public QuoteController(QuoteService quoteService, FetchQuote localFetch, FetchQuote remoteFetch) {
+////        this.quoteService = quoteService;
+////        this.localFetch = localFetch;
+////        this.remoteFetch = remoteFetch;
+////    }
+//
     public JSONObject remoteConnect() throws Exception {
         return remoteFetch.connect();
     }
     public JSONObject localConnect() throws Exception {
         return localFetch.connect();
+    }
+
+    @PostMapping()
+    public void addQuote(@RequestBody Quote quote) {
+        quoteService.addQuote(quote);
+    }
+
+    @GetMapping()
+    public List<Quote> getAll() {
+        return quoteService.getAllQuotes();
+    }
+
+    @GetMapping("{date}")
+    public Quote getQuote(@PathVariable("date") String date) {
+
+        try {
+            return quoteService.getQuote(new SimpleDateFormat(DATE_FORMAT).parse(date));
+        } catch (ParseException e) {
+            System.out.println("Date parse error");
+            return new Quote();
+        }
+    }
+
+    @GetMapping("hello")
+    public String hello() {
+        return "hello";
     }
 
 //    @PostMapping(path = "{date}")

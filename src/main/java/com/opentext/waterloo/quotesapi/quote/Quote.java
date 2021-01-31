@@ -20,15 +20,13 @@ public class Quote {
 
     public Quote() {}
 
-    public Quote(@JsonProperty("text") String text,
-                 @JsonProperty("date") Date date) {
-        this.id = UUID.randomUUID();
+    public Quote(UUID id, String text, Date date, int likes, int dislikes) {
+        this.id = id;
         this.text = text;
         this.date = date;
-        this.likes = 0;
-        this.dislikes = 0;
+        this.likes = likes;
+        this.dislikes = likes;
     }
-
 
     public UUID getId() {
         return id;

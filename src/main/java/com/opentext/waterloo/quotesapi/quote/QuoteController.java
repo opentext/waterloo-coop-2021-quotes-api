@@ -5,11 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
 
+@RestController
 @RequestMapping(path = "api/v1/quotes")
-@Controller
 public class QuoteController {
     @Autowired
     private QuoteRepository quoteRepository;
@@ -21,10 +19,6 @@ public class QuoteController {
 
     @GetMapping
     public List<Quote> getQuote(){
-        List<Quote> myList = quoteRepository.findAll();
-        for(int i = 0; i< myList.size(); i++){
-            System.out.println (myList.get(i).getText());
-        }
         return quoteRepository.findAll();
     }
 

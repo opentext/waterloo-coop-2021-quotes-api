@@ -58,4 +58,12 @@ public class Quote {
     public int getDislikes() {
         return dislikes;
     }
+    public void addLike(){
+        likes++;
+    }
+
+    public void addDislike(){
+        dislikes++;
+    }
+
 }

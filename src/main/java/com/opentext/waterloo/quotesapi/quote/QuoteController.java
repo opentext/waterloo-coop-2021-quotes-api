@@ -17,7 +17,7 @@ public class QuoteController {
     @Autowired
     private QuoteRepository quoteRepository;
 
-
+    @Autowired
     public QuoteController(QuoteRepository quoteRepository) {
         this.quoteRepository = quoteRepository;
     }

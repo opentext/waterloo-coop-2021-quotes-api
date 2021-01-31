@@ -2,10 +2,7 @@ package com.opentext.waterloo.quotesapi.quote;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,11 +21,15 @@ public class QuoteController {
 
     @GetMapping
     public List<Quote> getQuote(){
+        List<Quote> myList = quoteRepository.findAll();
+        for(int i = 0; i< myList.size(); i++){
+            System.out.println (myList.get(i).getText());
+        }
         return quoteRepository.findAll();
     }
 
     @PostMapping
-    public void putQuote(Quote quote){
+    public void putQuote(@RequestBody Quote quote){
         quoteRepository.save(quote);
     }
 

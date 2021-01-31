@@ -27,5 +27,12 @@ public class QuoteController {
         quoteRepository.save(quote);
     }
 
+    @PostMapping(path = "{date}/{likes}/{address}")
+    public void incrementLikes(@PathVariable ("likes") String like, @PathVariable("date") String date, @PathVariable ("address") String address) {
+        boolean check = like.equalsIgnoreCase("true");
+        quoteRepository.incrementLikes(check, date, address);
+    }
+
+
 
 }

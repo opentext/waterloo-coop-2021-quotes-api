@@ -1,7 +1,0 @@
-CREATE TABLE Quote(
-    id UUID NOT NULL PRIMARY KEY,
-    text VARCHAR(100) NOT NULL,
-    date VARCHAR(100) NOT NULL,
-    likes INT NOT NULL,
-    dislikes INT NOT NULL
-);

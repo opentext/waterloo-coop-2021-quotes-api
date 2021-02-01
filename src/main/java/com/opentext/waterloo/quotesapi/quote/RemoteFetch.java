@@ -1,5 +1,5 @@
-package com.opentext.waterloo.quotesapi.api;
-
+package com.opentext.waterloo.quotesapi.quote;
+/*
 import com.opentext.waterloo.quotesapi.QuotesApiApplication;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -50,9 +50,9 @@ public class RemoteFetch implements FetchQuote {
         return new JSONObject(builder);
     }
 
-    @Scheduled(cron = "0 0 0 * * ?")
+    @Scheduled(cron = "0 0 * * * ?")
     @CacheEvict(value = "quote", allEntries = true)
     public void clearCache() {
         log.info("Clear cache");
     }
-}
+}*/

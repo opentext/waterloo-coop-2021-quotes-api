@@ -34,15 +34,17 @@ public class CustomQuoteRepositoryImpl implements CustomQuoteRepository {
             sql = "UPDATE quote SET dislikes = dislikes +1 WHERE quote_uuid= '" +uuid + "'";
         }
         jdbcTemplate.execute(sql);
-        //To make the quote object, make a jdbcTemplate.query, then make a new quote, submit it with blank address(temp) and boolean check
-        Reaction reaction = new Reaction(jdbcTemplate1.query(sql, resultSet -> {
-            UUID quote_uuid =UUID.fromString(resultSet.getString("quote_uuid"));
+        Reaction reaction = new Reaction(jdbcTemplate1.query("SELECT text, date FROM quote WHERE quote_uuid='" +
+                uuid+"'", resultSet -> {
+            resultSet.next();
+            UUID quote_uuid =UUID.fromString(uuid);
             String text =resultSet.getString("text");
             Date currentDate = resultSet.getDate("date");
             return new Quote(text, currentDate, quote_uuid);
         }), check, "" );
-        jdbcTemplate.execute("INSERT INTO reaction(id, address, date, is_like, quote_quote_uuid) VALUES (" + reaction.getId() +", '" +reaction.getAddress() +
-                "', " +reaction.getLike() + ", '" + reaction.getQuoteId() + "'" );
+        jdbcTemplate.execute("INSERT INTO reaction(id, address, date, is_like, quote_quote_uuid) VALUES ('" + reaction.getId() +"', '"
+                +reaction.getAddress() +"', '" + reaction.getDate()+
+                "', " +reaction.getLike() + ", '" + uuid + "')" );
 
         return 1;
     }

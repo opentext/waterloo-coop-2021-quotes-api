@@ -50,4 +50,8 @@ public class Reaction {
     public UUID getQuoteId(){
         return quote.getId();
     }
+
+    public Quote getQuote() {
+        return quote;
+    }
 }

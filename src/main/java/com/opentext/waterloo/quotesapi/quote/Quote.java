@@ -25,9 +25,7 @@ public class Quote {
 
     public Quote() {}
 
-    public Quote(@JsonProperty("text") String text,
-                 @JsonProperty("date") Date date,
-                 @JsonProperty UUID quoteUuid) {
+    public Quote(UUID quoteUuid, String text, Date date, int likes, int dislikes) {
         this.quoteUuid = quoteUuid;
         this.text = text;
         this.date = date;

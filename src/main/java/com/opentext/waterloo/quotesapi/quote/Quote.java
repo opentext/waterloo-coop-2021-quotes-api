@@ -59,12 +59,14 @@ public class Quote {
     public int getDislikes() {
         return dislikes;
     }
-    public void addLike(){
-        likes++;
-    }
 
-    public void addDislike(){
-        dislikes++;
+    public void incrementLikes(boolean like){
+        if (like){
+            likes++;
+        }
+        else{
+            dislikes++;
+        }
     }
 
 }

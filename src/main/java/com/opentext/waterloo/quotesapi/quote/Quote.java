@@ -22,11 +22,10 @@ public class Quote {
     private int likes;
     private int dislikes;
 
+
     public Quote() {}
 
-    public Quote(@JsonProperty("text") String text,
-                 @JsonProperty("date") Date date,
-                 @JsonProperty UUID quoteUuid) {
+    public Quote(UUID quoteUuid, String text, Date date, int likes, int dislikes) {
         this.quoteUuid = quoteUuid;
         this.text = text;
         this.date = date;
@@ -58,12 +57,14 @@ public class Quote {
     public int getDislikes() {
         return dislikes;
     }
-    public void addLike(){
-        likes++;
-    }
 
-    public void addDislike(){
-        dislikes++;
+    public void incrementLikes(boolean like){
+        if (like){
+            likes++;
+        }
+        else{
+            dislikes++;
+        }
     }
 
 }

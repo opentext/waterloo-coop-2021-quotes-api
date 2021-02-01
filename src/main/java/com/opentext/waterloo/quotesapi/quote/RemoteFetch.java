@@ -1,5 +1,5 @@
 package com.opentext.waterloo.quotesapi.quote;
-
+/*
 import com.opentext.waterloo.quotesapi.QuotesApiApplication;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -55,4 +55,4 @@ public class RemoteFetch implements FetchQuote {
     public void clearCache() {
         log.info("Clear cache");
     }
-}
+}*/

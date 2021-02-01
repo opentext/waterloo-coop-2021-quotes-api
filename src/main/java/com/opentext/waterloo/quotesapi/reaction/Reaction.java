@@ -1,11 +1,9 @@
 package com.opentext.waterloo.quotesapi.reaction;
 
 import com.opentext.waterloo.quotesapi.quote.Quote;
+import org.hibernate.annotations.Type;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.UUID;
 
@@ -13,6 +11,8 @@ import java.util.UUID;
 @Table
 public class Reaction {
     @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    @Type(type="org.hibernate.type.PostgresUUIDType")
     private UUID id;
     private boolean isLike;
     private Date date;
@@ -41,5 +41,17 @@ public class Reaction {
 
     public String getAddress() {
         return address;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public UUID getQuoteId(){
+        return quote.getId();
+    }
+
+    public Quote getQuote() {
+        return quote;
     }
 }

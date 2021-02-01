@@ -1,5 +1,7 @@
 package com.opentext.waterloo.quotesapi.quote;
 
+//port org.json.JSONObject;
+
 public interface FetchQuote {
-    Quote connect() throws Exception;
+    //ONObject connect() throws Exception;
 }

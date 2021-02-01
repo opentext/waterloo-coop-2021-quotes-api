@@ -45,8 +45,6 @@ public class QuoteController {
         return quoteRepository.findAll();
     }
 
-
-
     @PostMapping
     public void putQuote(@RequestBody Quote quote){
         quoteRepository.save(quote);
@@ -63,6 +61,18 @@ public class QuoteController {
         }
     }
 
+    @GetMapping("{date}")
+    public Quote getQuote(@PathVariable("date") String date) {
 
+        try {
+            Date df = new SimpleDateFormat("yyyy-MM-dd").parse(date);
+//            Date d = new SimpleDateFormat("").parse("2020-01-30T00:00:00.000+00:00")
+            System.out.println(df);
+            return quoteRepository.findQuoteByDate(df);
+        } catch (ParseException e) {
+            System.out.println("Date parse error");
+            return new Quote();
+        }
+    }
 
 }

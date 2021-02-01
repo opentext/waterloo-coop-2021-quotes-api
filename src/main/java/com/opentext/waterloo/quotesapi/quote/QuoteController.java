@@ -6,7 +6,7 @@ import com.opentext.waterloo.quotesapi.quote.FetchQuote;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.opentext.waterloo.quotesapi.quote.QuoteService;
+import com.opentext.waterloo.quotesapi.quote.QuoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
@@ -25,41 +25,41 @@ public class QuoteController {
     private final String DATE_FORMAT = "dd-MM-yyyy";
 
     @Autowired
-    private QuoteService quoteService;
+    private QuoteRepository quoteRepository;
     @Autowired
     private FetchQuote localFetch;
     @Autowired
     private FetchQuote remoteFetch;
 
 ////    @Autowired
-////    public QuoteController(QuoteService quoteService, FetchQuote localFetch, FetchQuote remoteFetch) {
-////        this.quoteService = quoteService;
+////    public QuoteController(QuoteRepository quoteRepository, FetchQuote localFetch, FetchQuote remoteFetch) {
+////        this.quoteRepository = quoteRepository;
 ////        this.localFetch = localFetch;
 ////        this.remoteFetch = remoteFetch;
 ////    }
 //
-    public JSONObject remoteConnect() throws Exception {
+    public Quote remoteConnect() throws Exception {
         return remoteFetch.connect();
     }
-    public JSONObject localConnect() throws Exception {
+    public Quote localConnect() throws Exception {
         return localFetch.connect();
     }
 
     @PostMapping()
     public void addQuote(@RequestBody Quote quote) {
-        quoteService.addQuote(quote);
+        quoteRepository.addQuote(quote);
     }
 
     @GetMapping()
     public List<Quote> getAll() {
-        return quoteService.getAllQuotes();
+        return quoteRepository.getAllQuotes();
     }
 
     @GetMapping("{date}")
     public Quote getQuote(@PathVariable("date") String date) {
 
         try {
-            return quoteService.getQuote(new SimpleDateFormat(DATE_FORMAT).parse(date));
+            return quoteRepository.getQuote(new SimpleDateFormat(DATE_FORMAT).parse(date));
         } catch (ParseException e) {
             System.out.println("Date parse error");
             return new Quote();
@@ -73,18 +73,18 @@ public class QuoteController {
 
 //    @PostMapping(path = "{date}")
 //    public void incrementLikes(@RequestBody String like, @PathVariable("date") String date) {
-//        quoteService.incrementLikes(like, date);
+//        quoteRepository.incrementLikes(like, date);
 //    }
 
 //    @GetMapping
 //    public List<Quote> quotes(){
-//        return quoteService.quotes();
+//        return quoteRepository.quotes();
 //    }
 
 
 //    @PostMapping
 //    public void addQuote(@RequestBody Quote quote){
-//        quoteService.addQuote(quote);
+//        quoteRepository.addQuote(quote);
 //    }
 
 
@@ -109,7 +109,7 @@ public class QuoteController {
 
 //    @GetMapping(path = "current?date={date}")
 //    public Quote getQuoteByDate(@PathVariable("date") String date) {
-//        return quoteService.getQuoteByDate(date)
+//        return quoteRepository.getQuoteByDate(date)
 //                .orElse(null);
 //    }
 }

@@ -21,7 +21,7 @@ public class RemoteFetch implements FetchQuote {
     @Cacheable("quote")
     @Qualifier("remoteFetch")
     @Override
-    public JSONObject connect() throws Exception {
+    public Quote connect() throws Exception {
         String builder = null;
 
         try {

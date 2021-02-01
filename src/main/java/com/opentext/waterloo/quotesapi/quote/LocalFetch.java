@@ -14,9 +14,10 @@ import java.io.FileReader;
 public class LocalFetch implements FetchQuote {
     @Qualifier("localFetch")
     @Override
-    public JSONObject connect() throws Exception {
+    public Quote connect() throws Exception {
         Resource resource = new ClassPathResource("plain.json");
         File file = resource.getFile();
+        Quote quote;
 
         BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
         StringBuilder stringBuilder = new StringBuilder();
@@ -28,6 +29,13 @@ public class LocalFetch implements FetchQuote {
 
         bufferedReader.close();
 
-        return new JSONObject(stringBuilder.toString());
+        JSONObject jsonObject = new JSONObject(stringBuilder.toString());
+        JSONObject jsonQuote = new JSONObject(jsonObject.getJSONObject("contents")
+                .getJSONArray("quotes").getString(0));
+
+        String quoteOfTheDay = jsonQuote.get("quote").toString();
+
+        quote = new Quote(UUID.randomUUID(), quoteOfTheDay, date, 0, 0, null);
+        return quote;
     }
 }

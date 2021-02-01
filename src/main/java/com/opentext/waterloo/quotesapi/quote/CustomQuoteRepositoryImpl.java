@@ -22,9 +22,9 @@ public class CustomQuoteRepositoryImpl implements CustomQuoteRepository {
     @Override
     public int incrementLikes(String uuid, String like) {
         //TODO JUST HARD CODE IT AGAIN
-        String sql;
-        boolean check = like.equalsIgnoreCase("true");
+        String sql;);
         if (check){
+            boolean check = like.equalsIgnoreCase("true"
             sql = "UPDATE quote SET likes = likes +1 WHERE quote_uuid='" + uuid + "'";
         }
         else{

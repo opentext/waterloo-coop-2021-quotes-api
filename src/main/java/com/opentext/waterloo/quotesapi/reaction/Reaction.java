@@ -42,4 +42,12 @@ public class Reaction {
     public String getAddress() {
         return address;
     }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public UUID getQuoteId(){
+        return quote.getId();
+    }
 }

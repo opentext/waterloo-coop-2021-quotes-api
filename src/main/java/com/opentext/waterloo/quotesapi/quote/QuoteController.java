@@ -53,9 +53,9 @@ public class QuoteController {
         if(quoteLiked.isPresent()) {
             quoteLiked.get().incrementLikes(like);
             quoteRepository.save(quoteLiked.get());
+            reactionController.addReaction(quoteLiked.get(), like, UUID.fromString(uuid));
 
         }
-        reactionController.addReaction(quoteLiked.get(), like, UUID.fromString(uuid));
     }
 
 

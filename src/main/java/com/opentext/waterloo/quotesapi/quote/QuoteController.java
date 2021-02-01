@@ -9,6 +9,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.swing.text.html.Option;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -47,6 +49,15 @@ public class QuoteController {
         quoteRepository.incrementLikes(uuid, like);
     }
 
-
+//    @GetMapping("{date}")
+//    public Quote getQuote(@PathVariable("date") String date) {
+//
+//        try {
+//            return quoteRepository.findQuoteByDate(new SimpleDateFormat("yyyy-MM-dd").parse(date));
+//        } catch (ParseException e) {
+//            System.out.println("Date parse error");
+//            return new Quote();
+//        }
+//    }
 
 }

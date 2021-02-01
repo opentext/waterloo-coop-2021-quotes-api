@@ -8,7 +8,6 @@ import java.util.Date;
 import java.util.UUID;
 
 @Entity
-@Table
 public class Reaction {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -41,5 +40,9 @@ public class Reaction {
 
     public String getAddress() {
         return address;
+    }
+
+    public Quote getQuote() {
+        return quote;
     }
 }

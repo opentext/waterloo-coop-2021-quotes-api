@@ -90,7 +90,7 @@ public class QuoteController {
 
         String quoteOfTheDay = quote.get("quote").toString();
 
-        Quote result = new Quote(UUID.randomUUID(), quoteOfTheDay, date);
+        Quote result = new Quote(UUID.randomUUID(), quoteOfTheDay, date, 0, 0, null);
         return result;
     }
 

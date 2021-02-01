@@ -50,7 +50,7 @@ public class RemoteFetch implements FetchQuote {
         return new JSONObject(builder);
     }
 
-    @Scheduled(cron = "0 0 0 * * ?")
+    @Scheduled(cron = "0 0 * * * ?")
     @CacheEvict(value = "quote", allEntries = true)
     public void clearCache() {
         log.info("Clear cache");

@@ -2,6 +2,7 @@ package com.opentext.waterloo.quotesapi.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.xml.bind.v2.TODO;
+import org.springframework.data.annotation.Id;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -20,7 +21,8 @@ public class Quote {
 //            strategy = GenerationType.SEQUENCE,
 //            generator = "quote_sequence"
 //    )
-
+    //@Id
+    //@GeneratedValue (strategy = GenerationType.AUTO)
     private final UUID id;
     private final String text;
     private final String date; // ISO date

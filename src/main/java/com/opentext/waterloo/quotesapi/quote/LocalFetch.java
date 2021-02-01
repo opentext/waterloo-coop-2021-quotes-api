@@ -1,5 +1,5 @@
 package com.opentext.waterloo.quotesapi.quote;
-
+/*
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.io.ClassPathResource;
@@ -30,4 +30,4 @@ public class LocalFetch implements FetchQuote {
 
         return new JSONObject(stringBuilder.toString());
     }
-}
+}*/

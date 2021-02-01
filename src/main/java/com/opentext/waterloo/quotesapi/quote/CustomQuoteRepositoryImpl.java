@@ -2,6 +2,7 @@ package com.opentext.waterloo.quotesapi.quote;
 
 
 
+import com.opentext.waterloo.quotesapi.reaction.Reaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -31,6 +32,9 @@ public class CustomQuoteRepositoryImpl implements CustomQuoteRepository {
             sql = "UPDATE quote SET dislikes = dislikes +1 WHERE quote_uuid= '" +uuid + "'";
         }
         jdbcTemplate.execute(sql);
+        //To make the quote object, make a jdbcTemplate.query, then make a new quote, submit it with blank address(temp) and boolean check
+
+
         return 1;
     }
 }

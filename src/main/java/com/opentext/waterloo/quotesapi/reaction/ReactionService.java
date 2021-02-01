@@ -10,12 +10,12 @@ import java.util.UUID;
 
 @Service
 public class ReactionService {
-
+    /*
     @Autowired
     private ReactionRepository reactionRepository;
 
     public Quote getQuote(UUID id) {
-        return reactionRepository.findByQuoteId(id);
+        return reactionRepository.findById(id);
     }
 
     public void addReaction (Reaction reaction) {
@@ -24,5 +24,5 @@ public class ReactionService {
 
     public List<Reaction> getAll() {
         return new ArrayList<>(reactionRepository.findAll());
-    }
+    }*/
 }

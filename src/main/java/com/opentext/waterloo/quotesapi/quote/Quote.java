@@ -22,12 +22,7 @@ public class Quote {
     private int likes;
     private int dislikes;
 
-<<<<<<<<< Temporary merge branch 1
-    public Quote(@JsonProperty("id") UUID id,
-                 @JsonProperty("text") String text,
-                 @JsonProperty("date") Date date) {
-        this.id = id;
-=========
+
     public Quote() {}
 
     public Quote(@JsonProperty("text") String text,

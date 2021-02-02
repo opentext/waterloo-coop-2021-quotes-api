@@ -1,5 +1,5 @@
 package com.opentext.waterloo.quotesapi.quote;
-/*
+
 import com.opentext.waterloo.quotesapi.QuotesApiApplication;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -18,6 +18,7 @@ import java.net.URL;
 public class RemoteFetch implements FetchQuote {
     private static final Logger log = LoggerFactory.getLogger(QuotesApiApplication.class);
 
+    @Scheduled(cron = "0 0 * * * ?")
     @Cacheable("quote")
     @Qualifier("remoteFetch")
     @Override
@@ -55,4 +56,4 @@ public class RemoteFetch implements FetchQuote {
     public void clearCache() {
         log.info("Clear cache");
     }
-}*/
+}

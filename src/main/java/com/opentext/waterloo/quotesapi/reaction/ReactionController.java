@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.UUID;
 
 
 @RestController
@@ -25,13 +26,9 @@ public class ReactionController {
     }
 
 
-    @GetMapping
+    @GetMapping("reactions")
     public List<Reaction> getAll(){
         return reactionService.getAll();
-    }
-
-    public void addReaction(String uuid, boolean like, String address){
-        reactionService.addReaction(uuid, like, address);
     }
 
 

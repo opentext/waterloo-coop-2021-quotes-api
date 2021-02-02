@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.swing.text.html.Option;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -27,7 +28,7 @@ public class QuoteController {
     QuoteService quoteService;
 
     @Autowired
-    ReactionController reactionController;
+    ReactionService reactionService;
 
     @Autowired
     private FetchQuote localFetch;
@@ -56,18 +57,11 @@ public class QuoteController {
         return quoteService.getQuoteByDate(date);
     }
 
-    @PostMapping("{uuid}/reaction")
-    public void incrementLikes(@PathVariable("uuid") String uuid, @RequestBody boolean like, HttpServletRequest request) {
-        Quote quoteLiked = quoteService.getQuoteByUUID(uuid);
-        quoteLiked.incrementLikes(like);
-        quoteService.addQuote(quoteLiked);
+    @PostMapping("{uuid}")
+    public void incrementLikes(@PathVariable("uuid") UUID uuid, @RequestBody boolean like, HttpServletRequest request) {
         String address = request.getRemoteAddr();
-        reactionController.addReaction(uuid, like, address);
+        reactionService.addReaction(uuid, like, address);
     }
 
-    @PostMapping("{uuid}")
-    public void addReaction(@PathVariable("uuid") UUID uuid, @RequestBody boolean like) {
-        reactionService.addReaction(uuid, like);
-    }
 
 }

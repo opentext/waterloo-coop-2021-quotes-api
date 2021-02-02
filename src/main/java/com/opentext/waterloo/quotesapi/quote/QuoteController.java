@@ -57,7 +57,7 @@ public class QuoteController {
         return quoteService.getQuoteByDate(date);
     }
 
-    @PostMapping("{uuid}")
+    @PostMapping("{uuid}/reactions")
     public void incrementLikes(@PathVariable("uuid") UUID uuid, @RequestBody boolean like, HttpServletRequest request) {
         String address = request.getRemoteAddr();
         reactionService.addReaction(uuid, like, address);

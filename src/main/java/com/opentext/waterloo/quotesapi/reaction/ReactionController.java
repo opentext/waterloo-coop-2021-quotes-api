@@ -14,7 +14,7 @@ import java.util.UUID;
 
 
 @RestController
-@RequestMapping(path = "api/v1/quotes")
+@RequestMapping(path = "api/v1/reactions")
 public class ReactionController {
 
     @Autowired
@@ -26,7 +26,7 @@ public class ReactionController {
     }
 
 
-    @GetMapping("reactions")
+    @GetMapping
     public List<Reaction> getAll(){
         return reactionService.getAll();
     }

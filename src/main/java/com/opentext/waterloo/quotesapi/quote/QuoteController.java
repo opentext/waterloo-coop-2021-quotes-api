@@ -4,12 +4,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.opentext.waterloo.quotesapi.QuotesApiApplication;
 import com.opentext.waterloo.quotesapi.quote.FetchQuote;
 import com.opentext.waterloo.quotesapi.reaction.ReactionController;
+import com.opentext.waterloo.quotesapi.reaction.ReactionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.swing.text.html.Option;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -19,14 +21,14 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
-@RequestMapping(path = "api/v1/quotes")
+@RequestMapping(path = "/api/v1/quotes")
 public class QuoteController {
 
     @Autowired
-    QuoteRepository quoteRepository;
+    QuoteService quoteService;
 
     @Autowired
-    ReactionController reactionController;
+    ReactionService reactionService;
 
     @Autowired
     private FetchQuote localFetch;
@@ -42,37 +44,24 @@ public class QuoteController {
 
     @GetMapping
     public List<Quote> getQuote(){
-        return quoteRepository.findAll();
+        return quoteService.getQuotes();
     }
 
     @PostMapping
     public void putQuote(@RequestBody Quote quote){
-        quoteRepository.save(quote);
-    }
-
-    @PostMapping(path = "{uuid}/reactions")
-    public void incrementLikes(@PathVariable("uuid") String uuid, @JsonProperty @RequestBody boolean like) {
-        Optional<Quote> quoteLiked = quoteRepository.findById(UUID.fromString(uuid));
-        if(quoteLiked.isPresent()) {
-            quoteLiked.get().incrementLikes(like);
-            quoteRepository.save(quoteLiked.get());
-            reactionController.addReaction(quoteLiked.get(), like, UUID.fromString(uuid));
-
-        }
+        quoteService.addQuote(quote);
     }
 
     @GetMapping("{date}")
-    public Quote getQuote(@PathVariable("date") String date) {
-
-        try {
-            Date df = new SimpleDateFormat("yyyy-MM-dd").parse(date);
-//            Date d = new SimpleDateFormat("").parse("2020-01-30T00:00:00.000+00:00")
-            System.out.println(df);
-            return quoteRepository.findQuoteByDate(df);
-        } catch (ParseException e) {
-            System.out.println("Date parse error");
-            return new Quote();
-        }
+    public Quote getQuoteByDate(@PathVariable("date") String date) {
+        return quoteService.getQuoteByDate(date);
     }
+
+    @PostMapping("{uuid}")
+    public void incrementLikes(@PathVariable("uuid") UUID uuid, @RequestBody boolean like, HttpServletRequest request) {
+        String address = request.getRemoteAddr();
+        reactionService.addReaction(uuid, like, address);
+    }
+
 
 }

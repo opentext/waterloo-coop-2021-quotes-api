@@ -1,32 +1,35 @@
 package com.opentext.waterloo.quotesapi.reaction;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.opentext.waterloo.quotesapi.quote.Quote;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.UUID;
 
 
 @RestController
-@RequestMapping(path = "api/v1/reactions")
+@RequestMapping(path = "api/v1/quotes")
 public class ReactionController {
 
     @Autowired
-    private ReactionRepository reactionRepository;
+    private ReactionService reactionService;
 
-    @GetMapping
-    public List<Reaction> getReactions() {
-        return reactionRepository.findAll();
+    @GetMapping(path = "{date}/reactions")
+    public List<Reaction> getReactions(@PathVariable("date") String date) {
+        return reactionService.findByQuoteDate(date);
     }
 
 
-    public void addReaction(Quote quote, boolean likes, UUID quote_uuid) {
-        Reaction reaction = new Reaction(quote, likes, "placeholder");
-        reactionRepository.save(reaction);
+    @GetMapping("reactions")
+    public List<Reaction> getAll(){
+        return reactionService.getAll();
     }
+
 
 }

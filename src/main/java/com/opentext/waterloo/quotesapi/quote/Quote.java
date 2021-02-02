@@ -32,8 +32,8 @@ public class Quote {
 //        this.id = quoteUuid;
         this.text = text;
         this.date = date;
-        this.likes = 0;
-        this.dislikes = 0;
+        this.likes = likes;
+        this.dislikes = dislikes;
     }
 
     private boolean uniqueAddress() {

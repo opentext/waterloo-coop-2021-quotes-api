@@ -1,11 +1,8 @@
 package com.opentext.waterloo.quotesapi.quote;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.opentext.waterloo.quotesapi.reaction.Reaction;
 import org.hibernate.annotations.Type;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-import javax.annotation.processing.Generated;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.UUID;
@@ -17,9 +14,8 @@ public class Quote {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-//    @Type(type="org.hibernate.type.PostgresUUIDType")
-//    private java.util.UUID quoteUuid;
-    private Long id;
+    @Type(type="org.hibernate.type.PostgresUUIDType")
+    private java.util.UUID quoteUuid;
     private String text;
     private Date date; // ISO date
     private int likes;
@@ -29,7 +25,7 @@ public class Quote {
     public Quote() {}
 
     public Quote(String text, Date date, int likes, int dislikes) {
-//        this.id = quoteUuid;
+        this.quoteUuid = UUID.randomUUID();
         this.text = text;
         this.date = date;
         this.likes = likes;
@@ -42,7 +38,7 @@ public class Quote {
     }
 
     public UUID getId() {
-        return id;
+        return quoteUuid;
     }
 
     public String getText() {

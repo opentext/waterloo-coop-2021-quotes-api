@@ -63,7 +63,7 @@ public class QuoteService {
         return quoteRepository.findAll();
     }
 
-    @Scheduled(cron = "*/5 * * * *")
+    @Scheduled(cron = "* */5 * * * *")
     public void saveQuote() throws Exception {
         Quote quote;
         try {

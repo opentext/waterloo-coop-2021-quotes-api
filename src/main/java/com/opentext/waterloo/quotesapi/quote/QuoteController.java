@@ -1,23 +1,11 @@
 package com.opentext.waterloo.quotesapi.quote;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.opentext.waterloo.quotesapi.QuotesApiApplication;
-import com.opentext.waterloo.quotesapi.quote.FetchQuote;
-import com.opentext.waterloo.quotesapi.reaction.ReactionController;
 import com.opentext.waterloo.quotesapi.reaction.ReactionService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.swing.text.html.Option;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -59,7 +47,7 @@ public class QuoteController {
 
     @PostMapping("{uuid}/reactions")
     public void incrementLikes(@PathVariable("uuid") UUID uuid, @RequestBody boolean like, HttpServletRequest request) {
-        String address = request.getRemoteAddr();
+        String address = request.getHeader("X-FORWARDED-FOR");
         reactionService.addReaction(uuid, like, address);
     }
 

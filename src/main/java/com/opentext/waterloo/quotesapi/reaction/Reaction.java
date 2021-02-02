@@ -12,7 +12,7 @@ import java.util.UUID;
 public class Reaction {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-//    @Type(type="org.hibernate.type.PostgresUUIDType")
+    @Type(type="org.hibernate.type.PostgresUUIDType")
     private String id;
     private boolean isLike;
     private Date date;
@@ -46,7 +46,7 @@ public class Reaction {
         return id;
     }
 
-    public String getQuoteId(){
+    public UUID getQuoteId(){
         return quote.getId();
     }
 

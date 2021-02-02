@@ -23,7 +23,7 @@ import java.util.UUID;
 public class QuoteController {
 
     @Autowired
-    QuoteRepository quoteRepository;
+    QuoteService quoteService;
 
     @Autowired
     ReactionController reactionController;
@@ -42,37 +42,17 @@ public class QuoteController {
 
     @GetMapping
     public List<Quote> getQuote(){
-        return quoteRepository.findAll();
+        return quoteService.getQuotes();
     }
 
     @PostMapping
     public void putQuote(@RequestBody Quote quote){
-        quoteRepository.save(quote);
-    }
-
-    @PostMapping(path = "{uuid}/reactions")
-    public void incrementLikes(@PathVariable("uuid") String uuid, @JsonProperty @RequestBody boolean like) {
-        Optional<Quote> quoteLiked = quoteRepository.findById(UUID.fromString(uuid));
-        if(quoteLiked.isPresent()) {
-            quoteLiked.get().incrementLikes(like);
-            quoteRepository.save(quoteLiked.get());
-            reactionController.addReaction(quoteLiked.get(), like, UUID.fromString(uuid));
-
-        }
+        quoteService.addQuote(quote);
     }
 
     @GetMapping("{date}")
-    public Quote getQuote(@PathVariable("date") String date) {
-
-        try {
-            Date df = new SimpleDateFormat("yyyy-MM-dd").parse(date);
-//            Date d = new SimpleDateFormat("").parse("2020-01-30T00:00:00.000+00:00")
-            System.out.println(df);
-            return quoteRepository.findQuoteByDate(df);
-        } catch (ParseException e) {
-            System.out.println("Date parse error");
-            return new Quote();
-        }
+    public Quote getQuoteByDate(@PathVariable("date") String date) {
+        return quoteService.getQuoteByDate(date);
     }
 
 }

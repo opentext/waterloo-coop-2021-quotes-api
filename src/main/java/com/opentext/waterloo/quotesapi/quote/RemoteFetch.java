@@ -55,7 +55,7 @@ public class RemoteFetch implements FetchQuote {
         String quoteOfTheDay=test.get("quote").toString();
         Date date=java.util.Calendar.getInstance().getTime();
 
-        Quote quote = new Quote(UUID.randomUUID(),quoteOfTheDay,date,0,0);
+        Quote quote = new Quote(quoteOfTheDay,date,0,0);
         return quote;
     }
 

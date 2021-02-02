@@ -38,7 +38,7 @@ public class LocalFetch implements FetchQuote {
         String quoteOfTheDay = jsonQuote.get("quote").toString();
         Date date=java.util.Calendar.getInstance().getTime();
 
-        quote = new Quote(UUID.randomUUID(), quoteOfTheDay, date, 0, 0);
+        quote = new Quote(quoteOfTheDay, date, 0, 0);
         return quote;
     }
 }

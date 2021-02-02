@@ -17,8 +17,9 @@ public class Quote {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    @Type(type="org.hibernate.type.PostgresUUIDType")
-    private java.util.UUID quoteUuid;
+//    @Type(type="org.hibernate.type.PostgresUUIDType")
+//    private java.util.UUID quoteUuid;
+    private Long id;
     private String text;
     private Date date; // ISO date
     private int likes;
@@ -27,8 +28,8 @@ public class Quote {
 
     public Quote() {}
 
-    public Quote(UUID quoteUuid, String text, Date date, int likes, int dislikes) {
-        this.quoteUuid = quoteUuid;
+    public Quote(String text, Date date, int likes, int dislikes) {
+//        this.id = quoteUuid;
         this.text = text;
         this.date = date;
         this.likes = 0;
@@ -41,11 +42,15 @@ public class Quote {
     }
 
     public UUID getId() {
-        return quoteUuid;
+        return id;
     }
 
     public String getText() {
         return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 
     public Date getDate() {

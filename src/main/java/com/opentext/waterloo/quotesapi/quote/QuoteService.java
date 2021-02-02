@@ -16,6 +16,12 @@ public class QuoteService {
     @Autowired
     QuoteRepository quoteRepository;
 
+    public Quote getQuoteByUUID(String uuid_string) {
+        UUID uuid = UUID.fromString(uuid_string);
+        Optional<Quote> quote = quoteRepository.findById(uuid);
+        return quote.orElseGet(Quote::new);
+    }
+
     public Quote getQuoteByDate(String date) {
         Quote quote;
         try {

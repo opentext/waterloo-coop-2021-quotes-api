@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.opentext.waterloo.quotesapi.QuotesApiApplication;
 import com.opentext.waterloo.quotesapi.quote.FetchQuote;
 import com.opentext.waterloo.quotesapi.reaction.ReactionController;
+import com.opentext.waterloo.quotesapi.reaction.ReactionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

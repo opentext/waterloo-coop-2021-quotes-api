@@ -13,7 +13,7 @@ import java.util.UUID;
 
 
 @RestController
-@RequestMapping(path = "api/v1/reactions")
+@RequestMapping(path = "api/v1/quotes")
 public class ReactionController {
 
     @Autowired
@@ -24,8 +24,8 @@ public class ReactionController {
         return reactionService.findByQuoteDate(date);
     }
 
-    @PostMapping(path = "{date}/reactions")
-    public void addReaction(@PathVariable("date") String date, @JsonProperty @RequestBody boolean like) {
-        reactionService.addReaction(date, like);
+    @PostMapping("{uuid}")
+    public void addReaction(@PathVariable("uuid") String id, @JsonProperty @RequestBody boolean like) {
+        reactionService.addReaction(id, like);
     }
 }

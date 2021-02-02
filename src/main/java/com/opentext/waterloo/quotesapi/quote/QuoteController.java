@@ -28,18 +28,18 @@ public class QuoteController {
     @Autowired
     ReactionController reactionController;
 
-/*    @Autowired
+    @Autowired
     private FetchQuote localFetch;
     @Autowired
     private FetchQuote remoteFetch;
 
-    public JSONObject remoteConnect() throws Exception {
+    public Quote remoteConnect() throws Exception {
         return remoteFetch.connect();
     }
-    public JSONObject localConnect() throws Exception {
+    public Quote localConnect() throws Exception {
         return localFetch.connect();
     }
-*/
+
     @GetMapping
     public List<Quote> getQuote(){
         return quoteRepository.findAll();

@@ -1,5 +1,5 @@
 package com.opentext.waterloo.quotesapi.quote;
-/*
+
 import com.opentext.waterloo.quotesapi.QuotesApiApplication;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -13,6 +13,8 @@ import org.springframework.stereotype.Component;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Date;
+import java.util.UUID;
 
 @Component
 public class RemoteFetch implements FetchQuote {
@@ -21,7 +23,7 @@ public class RemoteFetch implements FetchQuote {
     @Cacheable("quote")
     @Qualifier("remoteFetch")
     @Override
-    public JSONObject connect() throws Exception {
+    public Quote connect() throws Exception {
         String builder = null;
 
         try {
@@ -47,7 +49,14 @@ public class RemoteFetch implements FetchQuote {
             log.error("IOException occurred! " + e.getMessage());
         }
 
-        return new JSONObject(builder);
+        JSONObject jsonObject = new JSONObject(builder);
+        JSONObject test = new JSONObject(jsonObject.getJSONObject("contents").getJSONArray("quotes").getString(0));
+
+        String quoteOfTheDay=test.get("quote").toString();
+        Date date=java.util.Calendar.getInstance().getTime();
+
+        Quote quote = new Quote(UUID.randomUUID(),quoteOfTheDay,date,0,0);
+        return quote;
     }
 
     @Scheduled(cron = "0 0 * * * ?")
@@ -55,4 +64,4 @@ public class RemoteFetch implements FetchQuote {
     public void clearCache() {
         log.info("Clear cache");
     }
-}*/
+}

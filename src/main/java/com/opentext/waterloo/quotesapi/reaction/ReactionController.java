@@ -1,5 +1,6 @@
 package com.opentext.waterloo.quotesapi.reaction;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,21 +13,19 @@ import java.util.UUID;
 
 
 @RestController
-@RequestMapping(path = "api/v1/reactions")
+@RequestMapping(path = "api/v1/quotes")
 public class ReactionController {
 
     @Autowired
-    private ReactionRepository reactionRepository;
+    private ReactionService reactionService;
 
-    @GetMapping
-    public List<Reaction> getReactions() {
-        return reactionRepository.findAll();
+    @GetMapping(path = "{date}/reactions")
+    public List<Reaction> getReactions(@PathVariable("date") String date) {
+        return reactionService.findByQuoteDate(date);
     }
 
-
-    public void addReaction(Quote quote, boolean likes, UUID quote_uuid) {
-        Reaction reaction = new Reaction(quote, likes, "placeholder");
-        reactionRepository.save(reaction);
+    @PostMapping("{uuid}")
+    public void addReaction(@PathVariable("uuid") String id, @JsonProperty @RequestBody boolean like) {
+        reactionService.addReaction(id, like);
     }
-
 }

@@ -20,14 +20,12 @@ import java.util.UUID;
 public class RemoteFetch implements FetchQuote {
     private static final Logger log = LoggerFactory.getLogger(QuotesApiApplication.class);
 
-    @Cacheable("quote")
-    @Qualifier("remoteFetch")
     @Override
     public Quote connect() throws Exception {
         String builder = null;
 
         try {
-            URL url = new URL("https://theysaidso.com/api/#qod");
+            URL url = new URL("http://quotes.rest/qod.json");
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("GET");
             urlConnection.setConnectTimeout(3000);
@@ -59,8 +57,8 @@ public class RemoteFetch implements FetchQuote {
         return quote;
     }
 
-    @Scheduled(cron = "0 0 * * * ?")
-    @CacheEvict(value = "quote", allEntries = true)
+//    @Scheduled(cron = "0 0 * * * ?")
+//    @CacheEvict(value = "quote", allEntries = true)
     public void clearCache() {
         log.info("Clear cache");
     }

@@ -24,6 +24,7 @@ public class Reaction {
     public Reaction() {}
 
     public Reaction(Quote quote, boolean like, String address) {
+        quote.incrementLikes(like);
         this.quote = quote;
         this.id = UUID.randomUUID();
         this.isLike = like;

@@ -29,8 +29,9 @@ public class ReactionService {
         return reactionRepository.findByQuote(quote);
     }
 
-    public void addReaction(String uuid, boolean like) {
+    public void addReaction(UUID uuid, boolean like) {
         Quote quote = quoteService.getQuoteByUUID(uuid);
+        quote.incrementLikes(like);
         reactionRepository.save(new Reaction(quote, like, "placeholder"));
     }
 }

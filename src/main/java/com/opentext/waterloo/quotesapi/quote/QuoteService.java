@@ -16,8 +16,7 @@ public class QuoteService {
     @Autowired
     QuoteRepository quoteRepository;
 
-    public Quote getQuoteByUUID(String uuid_string) {
-        UUID uuid = UUID.fromString(uuid_string);
+    public Quote getQuoteByUUID(UUID uuid) {
         Optional<Quote> quote = quoteRepository.findById(uuid);
         return quote.orElseGet(Quote::new);
     }

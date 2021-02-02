@@ -27,7 +27,7 @@ public class QuoteController {
     QuoteService quoteService;
 
     @Autowired
-    ReactionController reactionController;
+    ReactionService reactionService;
 
     @Autowired
     private FetchQuote localFetch;
@@ -54,6 +54,11 @@ public class QuoteController {
     @GetMapping("{date}")
     public Quote getQuoteByDate(@PathVariable("date") String date) {
         return quoteService.getQuoteByDate(date);
+    }
+
+    @PostMapping("{uuid}")
+    public void addReaction(@PathVariable("uuid") UUID uuid, @RequestBody boolean like) {
+        reactionService.addReaction(uuid, like);
     }
 
 }

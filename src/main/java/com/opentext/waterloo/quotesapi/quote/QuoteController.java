@@ -2,9 +2,11 @@ package com.opentext.waterloo.quotesapi.quote;
 
 import com.opentext.waterloo.quotesapi.reaction.ReactionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -41,7 +43,7 @@ public class QuoteController {
     }
 
     @GetMapping("{date}")
-    public Quote getQuoteByDate(@PathVariable("date") String date) {
+    public Quote getQuoteByDate(@PathVariable("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date date) {
         return quoteService.getQuoteByDate(date);
     }
 

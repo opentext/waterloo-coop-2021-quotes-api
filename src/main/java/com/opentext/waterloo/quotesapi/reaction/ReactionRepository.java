@@ -7,5 +7,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface ReactionRepository extends JpaRepository<Reaction, UUID> {
-    public List<Reaction> findByQuote(Quote quote);
+    List<Reaction> findByQuote(Quote quote);
+
+    List<Reaction> findByAddress(String address);
 }

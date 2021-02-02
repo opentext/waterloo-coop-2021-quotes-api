@@ -53,12 +53,11 @@ public class RemoteFetch implements FetchQuote {
         String quoteOfTheDay=test.get("quote").toString();
         Date date=java.util.Calendar.getInstance().getTime();
 
-        Quote quote = new Quote(UUID.randomUUID(),quoteOfTheDay,date);
-        return quote;
+        return new Quote(quoteOfTheDay,date,0,0);
     }
 
-//    @Scheduled(cron = "0 0 * * * ?")
-//    @CacheEvict(value = "quote", allEntries = true)
+    @Scheduled(cron = "*/5 * * * *")
+    @CacheEvict(value = "quote", allEntries = true)
     public void clearCache() {
         log.info("Clear cache");
     }

@@ -3,11 +3,7 @@ package com.opentext.waterloo.quotesapi.quote;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class QuoteService {
@@ -20,20 +16,10 @@ public class QuoteService {
         return quote.orElseGet(Quote::new);
     }
 
-    public Quote getQuoteByDate(String date) {
-        Quote quote;
-        try {
-            quote = quoteRepository.findQuoteByDate(new SimpleDateFormat("yyyy-MM-dd").parse(date));
-        } catch (ParseException e) {
-            System.out.println("Date parse error");
-            return new Quote();
-        }
-
-        if (quote == null) {
-            System.out.println("Quote not found");
-
-        }
-        return new Quote();
+    public Quote getQuoteByDate(Date date) {
+        return Objects.requireNonNullElseGet(
+                quoteRepository.findQuoteByDate(date),
+                Quote::new);
     }
 
     public void addQuote(Quote quote) {

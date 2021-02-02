@@ -1,16 +1,14 @@
 package com.opentext.waterloo.quotesapi.reaction;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 
 @RestController
@@ -21,15 +19,13 @@ public class ReactionController {
     private ReactionService reactionService;
 
     @GetMapping(path = "{date}/reactions")
-    public List<Reaction> getReactions(@PathVariable("date") String date) {
+    public List<Reaction> getReactions(@PathVariable("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date date) {
         return reactionService.findByQuoteDate(date);
     }
-
 
     @GetMapping("reactions")
     public List<Reaction> getAll(){
         return reactionService.getAll();
     }
-
 
 }

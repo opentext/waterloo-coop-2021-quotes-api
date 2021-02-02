@@ -20,14 +20,14 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
-@RequestMapping(path = "api/v1/quotes")
+@RequestMapping(path = "/api/v1/quotes")
 public class QuoteController {
 
     @Autowired
     QuoteService quoteService;
 
     @Autowired
-    ReactionService reactionService;
+    ReactionController reactionController;
 
     @Autowired
     private FetchQuote localFetch;
@@ -54,6 +54,15 @@ public class QuoteController {
     @GetMapping("{date}")
     public Quote getQuoteByDate(@PathVariable("date") String date) {
         return quoteService.getQuoteByDate(date);
+    }
+
+    @PostMapping("{uuid}/reaction")
+    public void incrementLikes(@PathVariable("uuid") String uuid, @RequestBody boolean like, HttpServletRequest request) {
+        Quote quoteLiked = quoteService.getQuoteByUUID(uuid);
+        quoteLiked.incrementLikes(like);
+        quoteService.addQuote(quoteLiked);
+        String address = request.getRemoteAddr();
+        reactionController.addReaction(uuid, like, address);
     }
 
     @PostMapping("{uuid}")

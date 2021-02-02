@@ -1,6 +1,5 @@
 package com.opentext.waterloo.quotesapi.quote;
 
-import com.opentext.waterloo.quotesapi.reaction.ReactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,6 +42,6 @@ public class QuoteService {
     }
 
     public List<Quote> getQuotes() {
-        return  quoteRepository.findAll();
+        return quoteRepository.findAll();
     }
 }

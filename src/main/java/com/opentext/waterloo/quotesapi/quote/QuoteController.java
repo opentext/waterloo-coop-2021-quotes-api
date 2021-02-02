@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.swing.text.html.Option;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -20,7 +21,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
-@RequestMapping(path = "api/v1/quotes")
+@RequestMapping(path = "/api/v1/quotes")
 public class QuoteController {
 
     @Autowired
@@ -54,6 +55,15 @@ public class QuoteController {
     @GetMapping("{date}")
     public Quote getQuoteByDate(@PathVariable("date") String date) {
         return quoteService.getQuoteByDate(date);
+    }
+
+    @PostMapping("{uuid}/reaction")
+    public void incrementLikes(@PathVariable("uuid") String uuid, @RequestBody boolean like, HttpServletRequest request) {
+        Quote quoteLiked = quoteService.getQuoteByUUID(uuid);
+        quoteLiked.incrementLikes(like);
+        quoteService.addQuote(quoteLiked);
+        String address = request.getRemoteAddr();
+        reactionController.addReaction(uuid, like, address);
     }
 
 }

@@ -13,12 +13,13 @@ import org.springframework.stereotype.Component;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Date;
+import java.util.UUID;
 
 @Component
 public class RemoteFetch implements FetchQuote {
     private static final Logger log = LoggerFactory.getLogger(QuotesApiApplication.class);
 
-    @Scheduled(cron = "0 0 * * * ?")
     @Cacheable("quote")
     @Qualifier("remoteFetch")
     @Override
@@ -48,7 +49,14 @@ public class RemoteFetch implements FetchQuote {
             log.error("IOException occurred! " + e.getMessage());
         }
 
-        return new JSONObject(builder);
+        JSONObject jsonObject = new JSONObject(builder);
+        JSONObject test = new JSONObject(jsonObject.getJSONObject("contents").getJSONArray("quotes").getString(0));
+
+        String quoteOfTheDay=test.get("quote").toString();
+        Date date=java.util.Calendar.getInstance().getTime();
+
+        Quote quote = new Quote(UUID.randomUUID(),quoteOfTheDay,date,0,0);
+        return quote;
     }
 
     @Scheduled(cron = "0 0 * * * ?")

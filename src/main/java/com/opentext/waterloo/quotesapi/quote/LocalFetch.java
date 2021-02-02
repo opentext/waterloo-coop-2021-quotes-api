@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.Date;
+import java.util.UUID;
 
 @Component
 public class LocalFetch implements FetchQuote {
@@ -34,8 +36,9 @@ public class LocalFetch implements FetchQuote {
                 .getJSONArray("quotes").getString(0));
 
         String quoteOfTheDay = jsonQuote.get("quote").toString();
+        Date date=java.util.Calendar.getInstance().getTime();
 
-        quote = new Quote(UUID.randomUUID(), quoteOfTheDay, date, 0, 0, null);
+        quote = new Quote(UUID.randomUUID(), quoteOfTheDay, date, 0, 0);
         return quote;
     }
 }

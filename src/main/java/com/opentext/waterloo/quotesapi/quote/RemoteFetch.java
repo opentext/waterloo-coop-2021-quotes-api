@@ -4,7 +4,9 @@ import com.opentext.waterloo.quotesapi.QuotesApiApplication;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -20,6 +22,8 @@ public class RemoteFetch implements FetchQuote {
     private static final Logger log = LoggerFactory.getLogger(QuotesApiApplication.class);
 
     @Override
+    @Cacheable("quote")
+    @Qualifier("remoteFetch")
     public Quote connect() throws Exception {
         String builder = null;
 
@@ -55,7 +59,7 @@ public class RemoteFetch implements FetchQuote {
         return new Quote(quoteOfTheDay,date,0,0);
     }
 
-    @Scheduled(cron = "* */5 * * * *")
+    @Scheduled(cron = "0 0 0 * * *")
     @CacheEvict(value = "quote", allEntries = true)
     public void clearCache() {
         log.info("Clear cache");

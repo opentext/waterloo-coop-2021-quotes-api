@@ -49,7 +49,8 @@ public class QuoteController {
 
     @PostMapping("{uuid}/reactions")
     public void incrementLikes(@PathVariable("uuid") UUID uuid, @RequestBody boolean like, HttpServletRequest request) {
-        String address = request.getHeader("X-FORWARDED-FOR");
+        String address = request.getRemoteAddr();
+        System.out.println(address);
         reactionService.addReaction(uuid, like, address);
     }
 

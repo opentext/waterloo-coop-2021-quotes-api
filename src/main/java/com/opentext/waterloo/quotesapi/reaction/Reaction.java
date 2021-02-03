@@ -13,7 +13,7 @@ public class Reaction {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     @Type(type="org.hibernate.type.PostgresUUIDType")
-    private String id;
+    private UUID id;
     private boolean isLike;
     private Date date;
     private String address;
@@ -42,7 +42,7 @@ public class Reaction {
         return address;
     }
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 

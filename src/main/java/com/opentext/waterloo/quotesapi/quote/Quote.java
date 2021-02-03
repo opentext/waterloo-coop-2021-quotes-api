@@ -9,7 +9,6 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "quote")
-@EnableScheduling
 public class Quote {
 
     @Id

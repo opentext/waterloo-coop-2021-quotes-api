@@ -1,0 +1,6 @@
+---
+applications:
+  - name: spring-qod
+    memory: 1G
+    random-route: true
+    path: build/libs/spring-qod-1.0.jar

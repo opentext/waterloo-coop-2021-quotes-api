@@ -20,18 +20,6 @@ public class QuoteController {
     @Autowired
     ReactionService reactionService;
 
-    @Autowired
-    private FetchQuote localFetch;
-    @Autowired
-    private FetchQuote remoteFetch;
-
-    public Quote remoteConnect() throws Exception {
-        return remoteFetch.connect();
-    }
-    public Quote localConnect() throws Exception {
-        return localFetch.connect();
-    }
-
     @GetMapping
     public List<Quote> getQuote(){
         return quoteService.getQuotes();

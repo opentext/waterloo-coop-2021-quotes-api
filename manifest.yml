@@ -1,0 +1,6 @@
+---
+applications:
+  - name: spring-qod
+    memory: 1G
+    random-route: true
+    path: target/quotes-api-0.0.1-SNAPSHOT.jar

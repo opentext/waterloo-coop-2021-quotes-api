@@ -46,9 +46,13 @@ public class QuoteService {
     }
 
     public Quote getQuoteByDate(Date date) {
-        return Objects.requireNonNullElseGet(
-                quoteRepository.findQuoteByDate(roundDate(date)),
-                Quote::new);
+        Quote quote = quoteRepository.findQuoteByDate(roundDate(date));
+        if (quote != null) {
+            return quote;
+        }
+        else {
+            return new Quote();
+        }
     }
 
     public void addQuote(Quote quote) {

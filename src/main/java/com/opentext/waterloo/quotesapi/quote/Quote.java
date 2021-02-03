@@ -27,14 +27,14 @@ public class Quote {
     public Quote(String text, Date date, int likes, int dislikes) {
         this.quoteUuid = UUID.randomUUID();
         this.text = text;
-        this.date = date;
+        this.date = QuoteService.roundDate(date);
         this.likes = likes;
         this.dislikes = dislikes;
     }
 
-    private boolean uniqueAddress() {
-        // TODO: Add code to get ip address, then check if unique
-        return true;
+    // Only used for testing purposes
+    public void roundDate() {
+        this.date = QuoteService.roundDate(date);
     }
 
     public UUID getId() {

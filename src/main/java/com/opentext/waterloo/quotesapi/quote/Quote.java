@@ -1,10 +1,11 @@
 package com.opentext.waterloo.quotesapi.quote;
 
+import com.opentext.waterloo.quotesapi.reaction.Reaction;
 import org.hibernate.annotations.Type;
-import org.springframework.scheduling.annotation.EnableScheduling;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -20,6 +21,8 @@ public class Quote {
     private int likes;
     private int dislikes;
 
+    @OneToMany(mappedBy = "quote")
+    private List<Reaction> reactions;
 
     public Quote() {}
 
@@ -58,6 +61,14 @@ public class Quote {
 
     public int getDislikes() {
         return dislikes;
+    }
+
+    public List<Reaction> getReactions() {
+        return reactions;
+    }
+
+    public void setReactions(List<Reaction> reactions) {
+        this.reactions = reactions;
     }
 
     public void incrementLikes(boolean like){

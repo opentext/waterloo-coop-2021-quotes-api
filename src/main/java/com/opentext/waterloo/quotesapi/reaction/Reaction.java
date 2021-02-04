@@ -1,5 +1,7 @@
 package com.opentext.waterloo.quotesapi.reaction;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.opentext.waterloo.quotesapi.quote.Quote;
 import org.hibernate.annotations.Type;
 
@@ -14,11 +16,13 @@ public class Reaction {
     @GeneratedValue(strategy=GenerationType.AUTO)
     @Type(type="org.hibernate.type.PostgresUUIDType")
     private UUID id;
+    @JsonProperty
     private boolean isLike;
     private Date date;
     private String address;
 
     @ManyToOne
+    @JsonIgnore
     private Quote quote;
 
     public Reaction() {}

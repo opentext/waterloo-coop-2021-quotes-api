@@ -52,12 +52,4 @@ public class QuoteController {
         String address = request.getRemoteAddr();
         reactionService.addReaction(uuid, like.getLike(), address);
     }
-
-    @PostMapping("delete")
-    public void deleteAll() {
-        reactionService.deleteAll();
-        quoteService.deleteAll();
-    }
-
-
 }

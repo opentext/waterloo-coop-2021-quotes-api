@@ -19,5 +19,4 @@ public class LocalFetchTest {
     public void connectTest() {
         assertThat(localFetch).isNotNull();
     }
-
 }

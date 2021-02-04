@@ -1,7 +1,6 @@
 package com.opentext.waterloo.quotesapi.quote;
 
 import com.opentext.waterloo.quotesapi.QuotesApiApplication;
-import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

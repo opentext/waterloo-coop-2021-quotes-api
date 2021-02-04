@@ -10,7 +10,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.Date;
-import java.util.UUID;
 
 @Component
 public class LocalFetch implements FetchQuote {

@@ -2,7 +2,10 @@ package com.opentext.waterloo.quotesapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
 @SpringBootApplication
@@ -12,5 +15,6 @@ public class QuotesApiApplication {
     public static void main(String[] args) {
         SpringApplication.run(QuotesApiApplication.class, args);
     }
+
 
 }

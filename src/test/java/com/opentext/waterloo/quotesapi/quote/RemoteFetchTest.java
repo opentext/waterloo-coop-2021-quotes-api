@@ -30,7 +30,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class RemoteFetchTest {
 
     @Mock
-    RemoteFetch remoteQuoteRepository = Mockito.mock(RemoteFetch.class);
+    RemoteFetch remoteFetch = Mockito.mock(RemoteFetch.class);
     JSONObject mockJSON = Mockito.mock(JSONObject.class);
 
     @Autowired
@@ -44,7 +44,7 @@ class RemoteFetchTest {
     @Test
     public void connectTest() {
         try {
-            doReturn(mockJSON).when(remoteQuoteRepository).connect();
+            doReturn(mockJSON).when(remoteFetch).connect();
         } catch (Exception e) {
             e.printStackTrace();
         }

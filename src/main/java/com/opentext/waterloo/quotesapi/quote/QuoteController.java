@@ -1,5 +1,6 @@
 package com.opentext.waterloo.quotesapi.quote;
 
+import com.opentext.waterloo.quotesapi.reaction.Reaction;
 import com.opentext.waterloo.quotesapi.reaction.ReactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -10,6 +11,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping(path = "/api/v1/quotes")
 public class QuoteController {
@@ -38,8 +40,9 @@ public class QuoteController {
     }
 
     @PostMapping
-    public void putQuote(@RequestBody Quote quote){
+    public Quote putQuote(@RequestBody Quote quote){
         quoteService.addQuote(quote);
+        return quote;
     }
 
     @GetMapping("{date}")
@@ -48,10 +51,10 @@ public class QuoteController {
     }
 
     @PostMapping("{uuid}/reactions")
-    public void incrementLikes(@PathVariable("uuid") UUID uuid, @RequestBody boolean like, HttpServletRequest request) {
+    public void incrementLikes(@PathVariable("uuid") UUID uuid, @RequestBody Reaction like, HttpServletRequest request) {
         String address = request.getRemoteAddr();
         System.out.println(address);
-        reactionService.addReaction(uuid, like, address);
+        reactionService.addReaction(uuid, like.getLike(), address);
     }
 
 

@@ -22,7 +22,7 @@ public class QuoteController {
     @Autowired
     ReactionService reactionService;
 
-    @GetMapping
+    @GetMapping("all")
     public List<Quote> getQuote(){
         return quoteService.getQuotes();
     }
@@ -33,16 +33,26 @@ public class QuoteController {
         return quote;
     }
 
+    @GetMapping
+    public Quote getTodayQuote() {
+        return quoteService.getQuoteByDate(QuoteService.roundDate(new Date()));
+    }
+
     @GetMapping("{date}")
     public Quote getQuoteByDate(@PathVariable("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date date) {
         return quoteService.getQuoteByDate(date);
     }
 
-    @PostMapping("{uuid}/reactions")
+    @PostMapping("{uuid}")
     public void incrementLikes(@PathVariable("uuid") UUID uuid, @RequestBody Reaction like, HttpServletRequest request) {
         String address = request.getRemoteAddr();
-        System.out.println(address);
         reactionService.addReaction(uuid, like.getLike(), address);
+    }
+
+    @PostMapping("delete")
+    public void deleteAll() {
+        reactionService.deleteAll();
+        quoteService.deleteAll();
     }
 
 

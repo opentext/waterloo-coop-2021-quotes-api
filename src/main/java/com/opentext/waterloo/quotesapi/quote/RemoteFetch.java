@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.*;
 import java.util.Date;
-import java.util.UUID;
 
 @Component
 public class RemoteFetch implements FetchQuote {

@@ -1,6 +1,8 @@
 package com.opentext.waterloo.quotesapi.quote;
 
 import com.opentext.waterloo.quotesapi.reaction.Reaction;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -13,8 +15,16 @@ import java.util.UUID;
 public class Quote {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    @Type(type="org.hibernate.type.PostgresUUIDType")
+//    @GeneratedValue(generator = "UUID")
+//    @GenericGenerator(
+//            name = "UUID",
+//            strategy = "org.hibernate.id.UUIDGenerator"
+//    )
+//    @Column(name = "ID", updatable = false, nullable = false)
+//    @ColumnDefault("random_uuid()")
+//    @Type(type = "uuid-char")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Type(type ="org.hibernate.type.PostgresUUIDType")
     private java.util.UUID quoteUuid;
     private String text;
     private Date date; // ISO date

@@ -18,7 +18,7 @@ public class QuoteService {
     QuoteRepository quoteRepository;
 
     public static Date roundDate(Date date) {
-        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("EST"));
+        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
         cal.setTime(date);
         cal.set(Calendar.HOUR_OF_DAY, 0);
         cal.set(Calendar.MINUTE, 0);

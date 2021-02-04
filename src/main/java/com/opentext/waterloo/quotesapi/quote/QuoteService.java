@@ -55,6 +55,7 @@ public class QuoteService {
     }
 
     public void addQuote(Quote quote) {
+        quote.setQuoteUuid(UUID.randomUUID());
         quote.roundDate();
         quoteRepository.save(quote);
     }
@@ -73,6 +74,8 @@ public class QuoteService {
             log.error("Live quote fetch failed! Returning local json file" + e.getMessage());
             quote = localConnect();
         }
+        addQuote(quote);
+    }
 
         quoteRepository.save(quote);
     }

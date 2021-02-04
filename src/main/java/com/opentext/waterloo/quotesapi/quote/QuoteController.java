@@ -38,6 +38,10 @@ public class QuoteController {
         return quoteService.getQuoteByDate(QuoteService.roundDate(new Date()));
     }
 
+//    @GetMapping("{date}")
+//    public Quote getQuoteByDate(@PathVariable("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date date) {
+//        return quoteService.getQuoteByDate(date);
+//    }
     @GetMapping("{date}")
     public Quote getQuoteByDate(@PathVariable("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date date) {
         return quoteService.getQuoteByDate(date);

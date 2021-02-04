@@ -70,10 +70,9 @@ public class RemoteFetch implements FetchQuote {
             throw e;
         }
 
-        String quoteOfTheDay=test.get("quote").toString();
-        Date date=java.util.Calendar.getInstance().getTime();
+        String quoteOfTheDay = test.get("quote").toString();
 
-        return new Quote(quoteOfTheDay,date,0,0);
+        return new Quote(quoteOfTheDay,new Date(),0,0);
     }
     //divide into 4 methods
 

@@ -4,6 +4,8 @@ import com.opentext.waterloo.quotesapi.reaction.Reaction;
 import com.opentext.waterloo.quotesapi.reaction.ReactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +13,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"*.otxlab.net", "http://localhost:3000"})
 @RestController
 @RequestMapping(path = "/api/v1/quotes")
 public class QuoteController {
@@ -23,12 +25,12 @@ public class QuoteController {
     ReactionService reactionService;
 
     @GetMapping("all")
-    public List<Quote> getQuote(){
+    public List<Quote> getQuote() {
         return quoteService.getQuotes();
     }
 
     @PostMapping
-    public Quote putQuote(@RequestBody Quote quote){
+    public Quote putQuote(@RequestBody Quote quote) {
         quoteService.addQuote(quote);
         return quote;
     }
@@ -39,7 +41,15 @@ public class QuoteController {
     }
 
     @GetMapping("{date}")
-    public Quote getQuoteByDate(@PathVariable("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date date) {
+    public Object getQuoteByDate(@PathVariable("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date date) throws Exception {
+        Date current = new Date();
+        Quote quote;
+        if (date.after(current)) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } else if (quoteService.getQuoteByDate(date).getText() == null) {
+            quote = quoteService.localConnect();
+            return quote;
+        }
         return quoteService.getQuoteByDate(date);
     }
 

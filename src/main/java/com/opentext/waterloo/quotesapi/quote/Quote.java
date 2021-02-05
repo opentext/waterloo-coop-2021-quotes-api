@@ -76,6 +76,10 @@ public class Quote {
         this.reactions = reactions;
     }
 
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
 
     public void incrementLikes(boolean like){
         if (like){

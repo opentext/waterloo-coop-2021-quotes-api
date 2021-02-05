@@ -38,4 +38,9 @@ public class ReactionService {
         quote.incrementLikes(like);
         quoteService.addQuote(quote);
     }
+
+    public void deleteAll(){
+        reactionRepository.deleteAll();
+    }
+
 }

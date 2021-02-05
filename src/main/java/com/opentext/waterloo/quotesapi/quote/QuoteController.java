@@ -50,4 +50,11 @@ public class QuoteController {
         String address = request.getRemoteAddr();
         reactionService.addReaction(uuid, like.getLike(), address);
     }
+
+    @DeleteMapping
+    public void deleteAll(){
+        reactionService.deleteAll();
+        quoteService.deleteAll();
+    }
+
 }

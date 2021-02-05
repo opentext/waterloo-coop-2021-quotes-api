@@ -53,7 +53,9 @@ public class QuoteService {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } else if (quote == null) {
             try {
-                return localConnect();
+                quote = localConnect();
+                quote.setDate(date);
+                quoteRepository.save(quote);
             }
             catch (Exception e) {
                 e.printStackTrace();
@@ -81,5 +83,9 @@ public class QuoteService {
             quote = localConnect();
         }
         addQuote(quote);
+    }
+
+    public void deleteAll(){
+        quoteRepository.deleteAll();
     }
 }

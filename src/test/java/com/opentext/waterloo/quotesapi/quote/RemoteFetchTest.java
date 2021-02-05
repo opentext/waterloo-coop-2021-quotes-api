@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class RemoteFetchTest {
 
-
+//comment
 
     @Mock
     RemoteFetch remoteFetch = Mockito.mock(RemoteFetch.class);

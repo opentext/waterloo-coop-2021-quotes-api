@@ -14,7 +14,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class QuoteServiceTest {
 
     Date test = QuoteService.roundDate(new Date());
-    private Quote quote = new Quote("Test", test, 0, 0);
 
     @Autowired
     QuoteRepository quoteRepository;
@@ -23,6 +22,7 @@ class QuoteServiceTest {
 
     @Test
     void getQuoteByUUID() {
+        Quote quote = new Quote("test", test);
         UUID id = quote.getId();
         quoteRepository.save(quote);
         assertEquals(quoteService.getQuoteByUUID(id).getId(), quote.getId());
@@ -30,12 +30,14 @@ class QuoteServiceTest {
 
     @Test
     void getQuoteByDate() {
+        Quote quote = new Quote("test", test);
         quoteRepository.save(quote);
-        assertEquals(quoteService.getQuoteByDate(test), quote.getDate());
+        assertEquals(quoteService.getQuoteByDate(test), quote);
     }
 
     @Test
     void addQuote() {
+        Quote quote = new Quote("test", test);
         quoteRepository.save(quote);
         assertThat(quoteRepository).isNotNull();
     }

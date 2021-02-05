@@ -73,7 +73,7 @@ class QuoteControllerTest {
 
     private static final String mockIP1 = "fake_ip_1";
     private static final String mockIp2 = "fake_ip_2";
-    private static final Quote mockQuote = new Quote("fake", new Date(),0, 0 );
+    private static final Quote mockQuote = new Quote("fake", new Date());
 
     @BeforeEach
     public void setup(){

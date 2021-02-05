@@ -55,7 +55,6 @@ public class QuoteService {
     }
 
     public void addQuote(Quote quote) {
-        quote.setQuoteUuid(UUID.randomUUID());
         quote.roundDate();
         quoteRepository.save(quote);
     }
@@ -77,6 +76,4 @@ public class QuoteService {
         addQuote(quote);
     }
 
-        quoteRepository.save(quote);
-    }
 }

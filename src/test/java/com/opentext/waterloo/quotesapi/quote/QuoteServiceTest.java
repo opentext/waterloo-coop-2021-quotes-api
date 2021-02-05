@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class QuoteServiceTest {
+
     Date test = QuoteService.roundDate(new Date());
     private Quote quote = new Quote("Test", test, 0, 0);
 

@@ -81,6 +81,7 @@ public class Quote {
         this.reactions = reactions;
     }
 
+
     public void incrementLikes(boolean like){
         if (like){
             likes++;

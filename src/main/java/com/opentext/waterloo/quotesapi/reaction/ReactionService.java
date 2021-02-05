@@ -22,11 +22,6 @@ public class ReactionService {
         return reactionRepository.findAll();
     }
 
-    public List<Reaction> findByQuoteDate(Date date) {
-        Quote quote = quoteService.getQuoteByDate(date);
-        return reactionRepository.findByQuote(quote);
-    }
-
     public void addReaction(UUID uuid, boolean like, String address) {
         // isolates address, then quote id
         List<Reaction> reaction = reactionRepository.findByAddress(address);

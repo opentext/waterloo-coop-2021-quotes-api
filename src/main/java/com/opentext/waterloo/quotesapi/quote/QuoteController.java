@@ -36,24 +36,12 @@ public class QuoteController {
     }
 
     @GetMapping
-    public Quote getTodayQuote() {
-        return quoteService.getQuoteByDate(QuoteService.roundDate(new Date()));
+    public Object getQuoteForToday() {
+        return quoteService.getQuoteByDate((new Date()));
     }
 
-//    @GetMapping("{date}")
-//    public Quote getQuoteByDate(@PathVariable("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date date) {
-//        return quoteService.getQuoteByDate(date);
-//    }
     @GetMapping("{date}")
-    public Object getQuoteByDate(@PathVariable("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date date) throws Exception {
-        Date current = new Date();
-        Quote quote;
-        if (date.after(current)) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        } else if (quoteService.getQuoteByDate(date).getText() == null) {
-            quote = quoteService.localConnect();
-            return quote;
-        }
+    public Object getQuoteByDate(@PathVariable("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date date) {
         return quoteService.getQuoteByDate(date);
     }
 

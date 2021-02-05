@@ -20,6 +20,11 @@ class QuoteServiceTest {
     @Autowired
     QuoteService quoteService;
 
+    @BeforeEach
+    public void setup() {
+        quoteRepository.deleteAll();
+    }
+
     @Test
     void getQuoteByUUID() {
         Quote quote = new Quote("test", test);

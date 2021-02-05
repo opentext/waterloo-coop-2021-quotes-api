@@ -3,8 +3,6 @@ package com.opentext.waterloo.quotesapi.reaction;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.opentext.waterloo.quotesapi.quote.Quote;
-import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -15,14 +13,6 @@ import java.util.UUID;
 @Table
 public class Reaction {
     @Id
-//    @GeneratedValue(generator = "UUID")
-//    @GenericGenerator(
-//            name = "UUID",
-//            strategy = "org.hibernate.id.UUIDGenerator"
-//    )
-//    @Column(name = "ID", updatable = false, nullable = false)
-//    @ColumnDefault("random_uuid()")
-//    @Type(type = "uuid-char")
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Type(type ="org.hibernate.type.PostgresUUIDType")
     private UUID id;

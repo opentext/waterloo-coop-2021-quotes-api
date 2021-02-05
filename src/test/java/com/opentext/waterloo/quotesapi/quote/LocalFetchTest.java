@@ -20,3 +20,4 @@ public class LocalFetchTest {
         assertThat(localFetch).isNotNull();
     }
 }
+//

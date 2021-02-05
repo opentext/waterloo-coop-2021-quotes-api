@@ -4,7 +4,7 @@ Clients can fetch quotes by date and post a like or dislike to the quote.
 
 ## Classes and Descriptions
 
-Quote:
+Quote: A java object that contains required information to display on a web server  
 
 Controller: 
 
@@ -16,7 +16,7 @@ LocalFetch: A service implementing FetchQuote to read from a local JSON file and
 
 RemoteFetch: A service implementing FetchQuote that fetches a JSONObject from "theysaidso" API at every midnight. The JSONObject is read and turned into a quote object 
 
-QuoteRepository:
+QuoteRepository: An interface that extends the JPA repository and implements a built in Spring method which returns a certain quote depending on the provided date.
 
 Reaction:
 

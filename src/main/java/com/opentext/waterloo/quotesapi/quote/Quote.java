@@ -27,7 +27,7 @@ public class Quote {
     @Type(type ="org.hibernate.type.PostgresUUIDType")
     private java.util.UUID quoteUuid;
     private String text;
-    private Date date; // ISO date
+    private Date date;
     private int likes;
     private int dislikes;
 
@@ -36,12 +36,12 @@ public class Quote {
 
     public Quote() {}
 
-    public Quote(String text, Date date, int likes, int dislikes) {
+    public Quote(String text, Date date) {
         this.quoteUuid = UUID.randomUUID();
         this.text = text;
         this.date = QuoteService.roundDate(date);
-        this.likes = likes;
-        this.dislikes = dislikes;
+        this.likes = 0;
+        this.dislikes = 0;
     }
 
     // Only used for testing purposes

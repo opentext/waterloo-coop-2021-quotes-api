@@ -4,6 +4,8 @@ import com.opentext.waterloo.quotesapi.QuotesApiApplication;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -44,19 +46,23 @@ public class QuoteService {
         return quote.orElseGet(Quote::new);
     }
 
-    public Quote getQuoteByDate(Date date) {
+    public Object getQuoteByDate(Date date) {
+        Date current = new Date();
         Quote quote = quoteRepository.findQuoteByDate(roundDate(date));
-        if (quote != null) {
-            return quote;
+        if (date.after(current)) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } else if (quote == null) {
+            try {
+                return localConnect();
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-        else {
-            return new Quote();
-        }
+        return quote;
     }
 
     public void addQuote(Quote quote) {
-        quote.setQuoteUuid(UUID.randomUUID());
-        quote.roundDate();
         quoteRepository.save(quote);
     }
 
@@ -75,8 +81,5 @@ public class QuoteService {
             quote = localConnect();
         }
         addQuote(quote);
-    }
-
-        quoteRepository.save(quote);
     }
 }

@@ -5,6 +5,7 @@ import com.opentext.waterloo.quotesapi.quote.QuoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -22,6 +23,8 @@ public class ReactionService {
         return reactionRepository.findAll();
     }
 
+    @Transactional
+//    @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
     public void addReaction(UUID uuid, boolean like, String address) {
         // isolates address, then quote id
         List<Reaction> reaction = reactionRepository.findByAddress(address);

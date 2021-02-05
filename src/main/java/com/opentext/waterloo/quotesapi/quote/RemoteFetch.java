@@ -71,7 +71,7 @@ public class RemoteFetch implements FetchQuote {
 
         String quoteOfTheDay = test.get("quote").toString();
 
-        return new Quote(quoteOfTheDay,new Date(),0,0);
+        return new Quote(quoteOfTheDay,new Date());
     }
     //divide into 4 methods
 

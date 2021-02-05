@@ -36,7 +36,7 @@ public class LocalFetch implements FetchQuote {
 
         String quoteOfTheDay = jsonQuote.get("quote").toString();
 
-        quote = new Quote(quoteOfTheDay, new Date(), 0, 0);
+        quote = new Quote(quoteOfTheDay, new Date());
         return quote;
     }
 }

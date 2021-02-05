@@ -44,11 +44,6 @@ public class Quote {
         this.dislikes = 0;
     }
 
-    // Only used for testing purposes
-    public void roundDate() {
-        this.date = QuoteService.roundDate(date);
-    }
-
     public UUID getId() {
         return quoteUuid;
     }
